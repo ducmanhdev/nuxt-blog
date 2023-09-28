@@ -1,0 +1,28 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@nuxtseo/module": "2.0.0-beta.15",
+    "eslint": "^8.50.0",
+    "nuxt": "^3.7.4"
+  },
+  "dependencies": {
+    "@formkit/auto-animate": "^0.8.0",
+    "@nuxt/content": "^2.8.4",
+    "@nuxt/image": "1.0.0-rc.2",
+    "@nuxt/ui": "^2.8.1",
+    "@nuxtjs/color-mode": "^3.3.0"
+  }
+}
