@@ -16,11 +16,9 @@ export default defineNuxtConfig({
         '@nuxtjs/eslint-module',
         '@nuxtseo/module',
         '@formkit/auto-animate',
-        '@nuxtjs/color-mode',
         '@nuxt/content',
         '@nuxt/image',
         '@nuxt/ui',
-        '@nuxtjs/tailwindcss'
     ],
     colorMode: {
         preference: 'system',
