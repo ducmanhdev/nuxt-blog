@@ -1,10 +1,25 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  darkMode: 'class',
-  content: [],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+import type {Config} from 'tailwindcss'
+
+export default <Partial<Config>>{
+    darkMode: 'class',
+    content: [],
+    theme: {
+        extend: {
+            container: {
+                center: true,
+                padding: '1rem',
+                screens: {
+                    'sm': '1024px',
+                    'md': '1024px',
+                    'lg': '1024px',
+                    'xl': '1024px',
+                    '2xl': '1024px',
+                }
+            }
+        },
+    },
+    plugins: [
+        require('@tailwindcss/typography'),
+    ],
 }
 

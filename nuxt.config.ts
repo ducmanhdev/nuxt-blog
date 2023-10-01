@@ -4,10 +4,7 @@ export default defineNuxtConfig({
     app: {
         head: {
             charset: 'utf-8',
-            viewport: 'width=device-width,initial-scale=1',
-            title: 'Riyad\'s Blog',
-            titleTemplate: '%s - Riyad\'s Blog',
-            meta: [{name: 'description', content: 'Riyad\'s awesome blog'}],
+            viewport: 'width=device-width, initial-scale=1',
         },
         pageTransition: {name: 'page', mode: 'out-in'},
         layoutTransition: {name: 'layout', mode: 'out-in'},
@@ -25,5 +22,13 @@ export default defineNuxtConfig({
         fallback: 'light',
         classPrefix: '',
         storageKey: 'nuxt-color-mode'
-    }
+    },
+    ui: {
+        icons: ['mdi', 'ion'],
+    },
+    content: {
+        highlight: {
+            theme: 'dracula',
+        },
+    },
 })
