@@ -4,6 +4,7 @@
       <div>
         <NuxtLoadingIndicator/>
         <NuxtPage/>
+        <UNotifications />
       </div>
     </NuxtLayout>
   </div>

@@ -20,9 +20,6 @@
                 <li>
                   <NuxtLink to="/categories">Categories</NuxtLink>
                 </li>
-                <li>
-                  <NuxtLink to="/about">About Me</NuxtLink>
-                </li>
               </ul>
             </nav>
           </div>

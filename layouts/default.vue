@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <MainHeader/>
-    <main>
+  <div class="min-h-screen flex flex-col">
+    <MainHeader class="shrink-0"/>
+    <main class="grow">
       <slot></slot>
     </main>
-    <MainFooter/>
+    <MainFooter class="shrink-0"/>
   </div>
 </template>
 

@@ -1,12 +1,11 @@
 <template>
   <div>
-    <SectionWelcome/>
-    <SectionRecent/>
-    <SectionTrending/>
+    Categories
   </div>
 </template>
 
 <script setup lang="ts">
+
 </script>
 
 <style scoped>

@@ -6,9 +6,10 @@ export default defineAppConfig({
             default: {
                 size: 'md'
             },
-            "size": {
-                "md": "text-md",
-                "lg": "text-md",
+        },
+        input: {
+            default: {
+                size: 'md'
             },
         },
     }

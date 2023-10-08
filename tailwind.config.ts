@@ -15,6 +15,9 @@ export default <Partial<Config>>{
                     'xl': '1024px',
                     '2xl': '1024px',
                 }
+            },
+            fontSize: {
+                sm: '16px'
             }
         },
     },

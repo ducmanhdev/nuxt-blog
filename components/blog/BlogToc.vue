@@ -4,7 +4,7 @@
     <nav>
       <ul class="space-y-3">
         <li v-for="link in links" :key="link.id">
-          <NuxtLink :to="`#${link.id}`" class="block hover:underline">
+          <NuxtLink :to="`#${link.id}`" replace class="block hover:underline">
             {{ link.text }}
           </NuxtLink>
         </li>
