@@ -5,14 +5,14 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <template v-if="data?.length" v-for="post in data" :key="post.title">
           <BlogVertical
-              :path="post._path"
-              :title="post.title"
-              :date="post.date"
-              :description="post.description"
-              :image="post.image"
-              :alt="post.alt"
-              :og-image="post.ogImage"
-              :tags="post.tags"
+            :path="post._path"
+            :title="post.title"
+            :date="post.date"
+            :description="post.description"
+            :image="post.image"
+            :alt="post.alt"
+            :og-image="post.ogImage"
+            :tags="post.tags"
           />
         </template>
         <BlogEmpty v-else />
@@ -30,16 +30,9 @@
 </template>
 
 <script setup lang="ts">
-const {data} = await useAsyncData(
-    'recent-post',
-    () => queryContent('/blogs')
-        .where({published: true})
-        .limit(3)
-        .sort({_id: -1})
-        .find()
+const { data } = await useAsyncData('recent-post', () =>
+  queryContent('/blogs').where({ published: true }).limit(3).sort({ _id: -1 }).find(),
 );
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

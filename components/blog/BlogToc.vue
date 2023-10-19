@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-const {path} = useRoute();
+const { path } = useRoute();
 const article = await queryContent(path).findOne();
 const links = article.body.toc?.links;
 </script>

@@ -7,12 +7,12 @@
         <!--        </aside>-->
         <div class="">
           <BlogHero
-              :title="data.title"
-              :image="data.image"
-              :alt="data.alt"
-              :date="data.date"
-              :description="data.description"
-              :tags="data.tags"
+            :title="data.title"
+            :image="data.image"
+            :alt="data.alt"
+            :date="data.date"
+            :description="data.description"
+            :tags="data.tags"
           />
           <ContentRenderer class="content" :value="data">
             <template #empty>
@@ -21,7 +21,7 @@
           </ContentRenderer>
         </div>
         <aside class="w-[240px] hidden lg:block">
-          <BlogToc/>
+          <BlogToc />
         </aside>
       </div>
     </div>
@@ -29,14 +29,14 @@
 </template>
 
 <script setup lang="ts">
-import type {Post} from "~/types/blog";
+import type { Post } from '~/types/blog';
 
-const {path} = useRoute();
+const { path } = useRoute();
 
-const {data, error} = await useAsyncData(`blog-post-${path}`, () => queryContent<Post>(path).findOne());
+const { data, error } = await useAsyncData(`blog-post-${path}`, () => queryContent<Post>(path).findOne());
 
 if (error.value) {
-  navigateTo('/404')
+  navigateTo('/404');
 }
 
 useHead({
@@ -44,17 +44,17 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: data.value?.description
+      content: data.value?.description,
     },
     // Test on: https://developers.facebook.com/tools/debug/ or https://socialsharepreview.com/
     {
       property: 'og:site_name',
-      content: 'Riyad\'s Blog'
+      content: "Riyad's Blog",
     },
     {
       key: 'og:type',
       property: 'og:type',
-      content: 'website'
+      content: 'website',
     },
     {
       property: 'og:url',
@@ -99,10 +99,10 @@ useHead({
       href: `https://blog-nurriyad.vercel.app/${path}`,
     },
   ],
-})
+});
 
 defineOgImage({
   title: data.value?.title,
   description: data.value?.description,
-})
+});
 </script>

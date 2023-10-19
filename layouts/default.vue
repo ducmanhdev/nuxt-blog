@@ -1,17 +1,13 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <MainHeader class="shrink-0"/>
+    <MainHeader class="shrink-0" />
     <main class="grow">
       <slot></slot>
     </main>
-    <MainFooter class="shrink-0"/>
+    <MainFooter class="shrink-0" />
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

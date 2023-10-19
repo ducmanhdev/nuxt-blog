@@ -11,27 +11,22 @@
             <NuxtLink to="/categories">Categories</NuxtLink>
           </li>
           <li>
-            <UDropdown
-                v-if="user"
-                :items="profileLinks"
-                :popper="{ placement: 'bottom-end' }"
-                class="flex"
-            >
-              <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4"/>
+            <UDropdown v-if="user" :items="profileLinks" :popper="{ placement: 'bottom-end' }" class="flex">
+              <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
             </UDropdown>
             <NuxtLink v-else to="/login">Login</NuxtLink>
           </li>
           <li>
             <UButton
-                variant="ghost"
-                :icon="colorMode.value === 'dark' ? 'i-heroicons-moon': 'i-heroicons-sun'"
-                class="text-2xl text-yellow-500 dark:text-blue-500"
-                @click="toggleColorMode"
-                :ui="{
-                  icon: {
-                    size: 'xl',
-                  }
-                }"
+              variant="ghost"
+              :icon="colorMode.value === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'"
+              class="text-2xl text-yellow-500 dark:text-blue-500"
+              @click="toggleColorMode"
+              :ui="{
+                icon: {
+                  size: 'xl',
+                },
+              }"
             />
           </li>
         </ul>
@@ -45,49 +40,54 @@ const toast = useToast();
 const colorMode = useColorMode();
 
 const toggleColorMode = () => {
-  colorMode.value === 'dark'
-      ? colorMode.preference = 'light'
-      : colorMode.preference = 'dark'
-}
+  colorMode.value === 'dark' ? (colorMode.preference = 'light') : (colorMode.preference = 'dark');
+};
 
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
 const handleSignOut = async () => {
-  const {error} = await supabase.auth.signOut();
+  const { error } = await supabase.auth.signOut();
   if (error) {
     return toast.add({
-      title: error.message
+      title: error.message,
     });
   }
   navigateTo('/');
   toast.add({
-    title: 'Sign out success!'
+    title: 'Sign out success!',
   });
-}
+};
 
 const profileLinks = computed(() => [
-  [{
-    label: user.value?.email,
-    slot: 'account',
-    disabled: true
-  }], [{
-    label: 'Profile',
-    icon: 'i-heroicons-user-circle-20-solid',
-    to: '/profile'
-  }],
-  [{
-    label: 'Bookmarks',
-    icon: 'i-heroicons-bookmark-20-solid'
-  }],
-  [{
-    label: 'Sign out',
-    icon: 'i-heroicons-arrow-left-on-rectangle-20-solid',
-    click: handleSignOut,
-  }]
-])
+  [
+    {
+      label: user.value?.email,
+      slot: 'account',
+      disabled: true,
+    },
+  ],
+  [
+    {
+      label: 'Profile',
+      icon: 'i-heroicons-user-circle-20-solid',
+      to: '/profile',
+    },
+  ],
+  [
+    {
+      label: 'Bookmarks',
+      icon: 'i-heroicons-bookmark-20-solid',
+    },
+  ],
+  [
+    {
+      label: 'Sign out',
+      icon: 'i-heroicons-arrow-left-on-rectangle-20-solid',
+      click: handleSignOut,
+    },
+  ],
+]);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -2,15 +2,14 @@
   <div class="min-h-screen color-theme">
     <NuxtLayout>
       <div>
-        <NuxtLoadingIndicator/>
-        <NuxtPage/>
+        <NuxtLoadingIndicator />
+        <NuxtPage />
         <UNotifications />
       </div>
     </NuxtLayout>
   </div>
 </template>
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style>
 .page-enter-active,
