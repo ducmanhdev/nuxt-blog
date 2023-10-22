@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="section-title">Recent Post</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <template v-if="data?.length" v-for="post in data" :key="post.title">
+        <template v-for="post in data" v-if="data?.length" :key="post.title">
           <BlogVertical
             :path="post._path"
             :title="post.title"

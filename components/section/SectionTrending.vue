@@ -2,8 +2,8 @@
   <section class="pb-10">
     <div class="container">
       <h2 class="section-title">Trending Post</h2>
-      <div class="space-y-4">
-        <template v-if="data?.length" v-for="post in data" :key="post.title">
+      <div v-if="data?.length" class="space-y-4">
+        <template v-for="post in data" :key="post.title">
           <BlogHorizontal
             :path="post._path"
             :title="post.title"
@@ -15,8 +15,8 @@
             :tags="post.tags"
           />
         </template>
-        <BlogEmpty v-else />
       </div>
+      <BlogEmpty v-else />
       <div class="text-center mt-4">
         <UButton to="/blogs">
           <template #trailing>

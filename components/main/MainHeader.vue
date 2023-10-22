@@ -21,12 +21,12 @@
               variant="ghost"
               :icon="colorMode.value === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'"
               class="text-2xl text-yellow-500 dark:text-blue-500"
-              @click="toggleColorMode"
               :ui="{
                 icon: {
                   size: 'xl',
                 },
               }"
+              @click="toggleColorMode"
             />
           </li>
         </ul>

@@ -2,7 +2,7 @@
   <div class="py-10">
     <div class="container">
       <h1 class="section-title text-center">Register</h1>
-      <UForm :schema="schema" :state="state" @submit="handleSubmit" class="space-y-4 max-w-md mx-auto">
+      <UForm :schema="schema" :state="state" class="space-y-4 max-w-md mx-auto" @submit="handleSubmit">
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" />
         </UFormGroup>
