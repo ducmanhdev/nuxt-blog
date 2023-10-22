@@ -8,26 +8,25 @@ datasource db {
 }
 
 model Post {
-  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt   DateTime  @default(now())
-  title       String?
-  description String?
-  image       String?
-  alt         String?
-  tag         String[]
-  published   Boolean?  @default(true)
-  content     String?
-  author      User?     @relation(fields: [authorId], references: [id])
-  authorId    String    @db.Uuid
-  comments    Comment[]
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt    DateTime  @default(now())
+  title        String
+  slug         String
+  description  String
+  thumbnail    String
+  thumbnailAlt String
+  tags         String[]
+  published    Boolean?  @default(true)
+  content      String
+  authorId     String    @db.Uuid
+  comments     Comment[]
 }
 
 model Comment {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt DateTime @default(now())
   content   String
-  creator   User?    @relation(fields: [creatorId], references: [id])
   creatorId String   @db.Uuid
-  post      Post?    @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
   postId    String   @db.Uuid
 }
