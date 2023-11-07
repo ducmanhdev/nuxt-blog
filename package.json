@@ -17,22 +17,22 @@
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/supabase": "^1.1.3",
     "@nuxtseo/module": "2.0.0-beta.15",
-    "@prisma/client": "^5.4.2",
+    "@prisma/client": "^5.5.2",
     "@tailwindcss/typography": "^0.5.10",
-    "eslint": "^8.52.0",
+    "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.8.1",
     "prettier": "^3.0.3",
-    "prisma": "^5.4.2"
+    "prisma": "^5.5.2"
   },
   "dependencies": {
-    "@formkit/auto-animate": "^0.8.0",
+    "@formkit/auto-animate": "^0.8.1",
     "@iconify-json/ion": "^1.1.12",
-    "@iconify-json/mdi": "^1.1.54",
-    "@nuxt/content": "^2.8.5",
+    "@iconify-json/mdi": "^1.1.55",
+    "@nuxt/content": "^2.9.0",
     "@nuxt/image": "1.0.0-rc.2",
-    "@nuxt/ui": "^2.9.0",
+    "@nuxt/ui": "^2.10.0",
     "dayjs": "^1.11.10",
     "zod": "^3.22.4"
   }
