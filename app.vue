@@ -1,12 +1,14 @@
 <template>
-  <div class="min-h-screen color-theme">
-    <NuxtLayout>
-      <div>
+  <div class="min-h-screen flex flex-col">
+    <MainHeader class="shrink-0" />
+    <main class="grow">
+      <div class="min-h-screen color-theme">
         <NuxtLoadingIndicator />
         <NuxtPage />
         <UNotifications />
       </div>
-    </NuxtLayout>
+    </main>
+    <MainFooter class="shrink-0" />
   </div>
 </template>
 <script setup lang="ts"></script>

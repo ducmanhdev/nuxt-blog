@@ -3,17 +3,19 @@
     <div class="container">
       <h2 class="section-title">Recent Post</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <template v-for="post in data" v-if="data?.length" :key="post.title">
-          <BlogVertical
-            :path="post._path"
-            :title="post.title"
-            :date="post.date"
-            :description="post.description"
-            :image="post.image"
-            :alt="post.alt"
-            :og-image="post.ogImage"
-            :tags="post.tags"
-          />
+        <template v-if="data?.length">
+          <template v-for="post in data" :key="post.title">
+            <BlogVertical
+              :path="post._path"
+              :title="post.title"
+              :date="post.date"
+              :description="post.description"
+              :image="post.image"
+              :alt="post.alt"
+              :og-image="post.ogImage"
+              :tags="post.tags"
+            />
+          </template>
         </template>
         <BlogEmpty v-else />
       </div>
