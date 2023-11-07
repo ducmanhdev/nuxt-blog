@@ -1,39 +1,25 @@
 <template>
   <div class="py-10">
     <div class="container">
-      <div class="lg:grid lg:grid-cols-[1fr_auto] lg:gap-10" v-if="data">
+      <div v-if="data" class="lg:grid lg:grid-cols-[1fr_auto] lg:gap-10">
         <!--        <aside class="shrink-0">-->
         <!--          <BlogNavigation/>-->
         <!--        </aside>-->
-        <div class="">
-          <BlogHero
-            :title="data.title"
-            :image="data.image"
-            :alt="data.alt"
-            :date="data.date"
-            :description="data.description"
-            :tags="data.tags"
-          />
-          <ContentRenderer class="content" :value="data">
-            <template #empty>
-              <p>No content found.</p>
-            </template>
-          </ContentRenderer>
-        </div>
-        <aside class="w-[240px] hidden lg:block">
-          <BlogToc />
-        </aside>
+        <div></div>
+        <aside class="w-[240px] hidden lg:block"></aside>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Post } from '~/types/blog';
-
 const { path } = useRoute();
 
-const { data, error } = await useAsyncData(`blog-post-${path}`, () => queryContent<Post>(path).findOne());
+const { data, error } = await useFetch('/api/post', {
+  query: {
+    id: 1,
+  },
+});
 
 if (error.value) {
   navigateTo('/404');

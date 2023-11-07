@@ -6,13 +6,12 @@
         <template v-if="data?.length">
           <template v-for="post in data" :key="post.title">
             <BlogHorizontal
-              :path="post._path"
+              :slug="post.slug"
               :title="post.title"
-              :date="post.date"
+              :created-at="post.createdAt"
               :description="post.description"
-              :image="post.image"
-              :alt="post.alt"
-              :og-image="post.ogImage"
+              :thumbnail="post.thumbnail"
+              :thumbnail-alt="post.thumbnailAlt"
               :tags="post.tags"
             />
           </template>
@@ -27,10 +26,8 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useAsyncData('blog', () =>
-  queryContent('/blogs').where({ published: true }).sort({ _id: 1 }).find(),
-);
 const page = ref(1);
+const { data, error } = useFetch('/api/posts');
 </script>
 
 <style scoped></style>
