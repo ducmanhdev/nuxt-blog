@@ -19,7 +19,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxt/ui',
-    '@nuxtjs/supabase',
   ],
   colorMode: {
     preference: 'system',
@@ -34,8 +33,5 @@ export default defineNuxtConfig({
     highlight: {
       theme: 'dracula',
     },
-  },
-  supabase: {
-    redirect: false,
   },
 });

@@ -50,29 +50,19 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>;
 
-const supabase = useSupabaseClient();
 const isSubmitLoading = ref(false);
 
-async function handleSubmit(event: FormSubmitEvent<Schema>) {
+const handleSubmit = (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    const { error } = await supabase.auth.signInWithPassword({
-      email: event.data.email,
-      password: event.data.password,
-    });
-    if (error) throw error;
-    toast.add({
-      title: 'Login success!',
-    });
-    navigateTo('/');
   } catch (error: any) {
     toast.add({
-      title: error.error_description || error.message,
+      title: error.message,
     });
   } finally {
     isSubmitLoading.value = false;
   }
-}
+};
 </script>
 
 <style scoped></style>
