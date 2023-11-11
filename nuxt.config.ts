@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET,
+  },
   app: {
     head: {
       charset: 'utf-8',
@@ -19,6 +22,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxt/ui',
+    '@sidebase/nuxt-auth',
+    'nuxt-server-utils',
   ],
   colorMode: {
     preference: 'system',
@@ -32,6 +37,16 @@ export default defineNuxtConfig({
   content: {
     highlight: {
       theme: 'dracula',
+    },
+  },
+  nuxtServerUtils: {
+    enabled: true, // default
+    enableDevTools: true, // default
+    mongodbUri: process.env.MONGODB_URI,
+  },
+  auth: {
+    provider: {
+      type: 'authjs',
     },
   },
 });

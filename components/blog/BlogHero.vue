@@ -21,9 +21,15 @@
 </template>
 
 <script setup lang="ts">
-import type { Post } from '~/types/blog';
-
-withDefaults(defineProps<Post>(), {
+interface Props {
+  title: string;
+  date: string;
+  description: string;
+  image: string;
+  alt: string;
+  tags: string[];
+}
+withDefaults(defineProps<Props>(), {
   title: 'no-title',
   date: 'no-date',
   description: 'no description',

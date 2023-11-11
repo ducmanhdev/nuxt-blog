@@ -11,7 +11,7 @@
             <NuxtLink to="/categories">Categories</NuxtLink>
           </li>
           <li>
-            <UDropdown v-if="user" :items="profileLinks" :popper="{ placement: 'bottom-end' }" class="flex">
+            <UDropdown v-if="data?.user" :items="profileLinks" :popper="{ placement: 'bottom-end' }" class="flex">
               <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
             </UDropdown>
             <NuxtLink v-else to="/login">Login</NuxtLink>
@@ -43,26 +43,26 @@ const toggleColorMode = () => {
   colorMode.value === 'dark' ? (colorMode.preference = 'light') : (colorMode.preference = 'dark');
 };
 
-const supabase = useSupabaseClient();
-const user = useSupabaseUser();
-
+const { data, signOut } = useAuth();
+console.log(data.value);
 const handleSignOut = async () => {
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    return toast.add({
+  try {
+    await signOut();
+    toast.add({
+      title: 'Signed out successfully',
+    });
+  } catch (error: any) {
+    toast.add({
       title: error.message,
+      color: 'red',
     });
   }
-  navigateTo('/');
-  toast.add({
-    title: 'Sign out success!',
-  });
 };
 
 const profileLinks = computed(() => [
   [
     {
-      label: user.value?.email,
+      label: 'user.value?.email',
       slot: 'account',
       disabled: true,
     },

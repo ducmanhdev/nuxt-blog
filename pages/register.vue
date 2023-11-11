@@ -28,6 +28,10 @@
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
 import { z } from 'zod';
 
+definePageMeta({
+  middleware: 'auth',
+});
+
 const toast = useToast();
 
 const state = ref({
@@ -53,6 +57,18 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
+    await $fetch('/api/auth/register', {
+      method: 'POST',
+      body: {
+        email: event.data.email,
+        password: event.data.password,
+      },
+    });
+    toast.add({
+      title: 'Registered successfully',
+      color: 'green',
+    });
+    navigateTo('/login');
   } catch (error: any) {
     toast.add({
       title: error.message,

@@ -26,16 +26,10 @@ import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
 import { z } from 'zod';
 
 definePageMeta({
-  middleware: [
-    () => {
-      const user = useSupabaseUser();
-      if (user.value) {
-        return navigateTo('/');
-      }
-    },
-  ],
+  middleware: 'auth',
 });
 
+const { signIn } = useAuth();
 const toast = useToast();
 
 const state = ref({
@@ -51,10 +45,11 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 const isSubmitLoading = ref(false);
-
-const handleSubmit = (event: FormSubmitEvent<Schema>) => {
+const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
+    await signIn('credentials', event.data);
+    navigateTo('/');
   } catch (error: any) {
     toast.add({
       title: error.message,
