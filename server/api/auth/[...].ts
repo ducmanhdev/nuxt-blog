@@ -31,9 +31,11 @@ export default NuxtAuthHandler({
           });
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { password, ...anotherUserFields } = user.toObject();
-        return anotherUserFields;
+        const { email, _id } = user.toObject();
+        return {
+          email,
+          _id,
+        };
       },
     }),
   ],
