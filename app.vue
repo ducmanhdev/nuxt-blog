@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="min-h-screen flex flex-col color-theme">
     <MainHeader class="shrink-0" />
     <main class="grow">
-      <div class="min-h-screen color-theme">
+      <div class="h-full color-theme">
         <NuxtLoadingIndicator />
         <NuxtPage />
         <UNotifications />
