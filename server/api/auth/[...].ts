@@ -9,6 +9,7 @@ export default NuxtAuthHandler({
     signIn: '/login',
   },
   providers: [
+    // @ts-ignore
     CredentialsProvider.default({
       name: 'credentials',
       credentials: {},
@@ -30,6 +31,7 @@ export default NuxtAuthHandler({
           });
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password, ...anotherUserFields } = user.toObject();
         return anotherUserFields;
       },
