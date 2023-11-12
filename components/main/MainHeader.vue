@@ -44,10 +44,9 @@ const toggleColorMode = () => {
 };
 
 const { data, signOut } = useAuth();
-console.log(data.value);
 const handleSignOut = async () => {
   try {
-    await signOut();
+    await signOut({ callbackUrl: '/' });
     toast.add({
       title: 'Signed out successfully',
     });
@@ -62,7 +61,7 @@ const handleSignOut = async () => {
 const profileLinks = computed(() => [
   [
     {
-      label: 'user.value?.email',
+      label: data.value?.user?.email,
       slot: 'account',
       disabled: true,
     },
