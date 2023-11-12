@@ -45,6 +45,7 @@ export default defineNuxtConfig({
     mongodbUri: process.env.MONGODB_URI,
   },
   auth: {
+    globalAppMiddleware: false,
     provider: {
       type: 'authjs',
     },
