@@ -27,6 +27,10 @@ import { z } from 'zod';
 
 definePageMeta({
   middleware: 'auth',
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  },
 });
 
 const { signIn } = useAuth();
@@ -48,8 +52,11 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await signIn('credentials', event.data);
-    navigateTo('/');
+    await signIn('credentials', {
+      email: event.data.email,
+      password: event.data.password,
+      callbackUrl: '/',
+    });
   } catch (error: any) {
     toast.add({
       title: error.message,

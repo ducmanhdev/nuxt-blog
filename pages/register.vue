@@ -30,6 +30,10 @@ import { z } from 'zod';
 
 definePageMeta({
   middleware: 'auth',
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  },
 });
 
 const toast = useToast();
