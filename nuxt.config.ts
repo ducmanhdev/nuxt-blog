@@ -19,7 +19,6 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@nuxtseo/module',
     '@formkit/auto-animate',
-    '@nuxt/content',
     '@nuxt/image',
     '@nuxt/ui',
     '@sidebase/nuxt-auth',
@@ -34,13 +33,8 @@ export default defineNuxtConfig({
   ui: {
     icons: ['mdi', 'ion'],
   },
-  content: {
-    highlight: {
-      theme: 'dracula',
-    },
-  },
   nuxtServerUtils: {
-    enabled: true, // default
+    enabled: true, // default3
     enableDevTools: true, // default
     mongodbUri: process.env.MONGODB_URI,
   },
