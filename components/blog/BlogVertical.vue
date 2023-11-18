@@ -3,15 +3,15 @@
     <NuxtLink :to="path" class="block aspect-[3/2] overflow-hidden">
       <NuxtImg
         class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-all duration-500"
-        :src="image"
-        :alt="alt"
+        :src="thumbnail"
+        :alt="thumbnailAlt"
       />
     </NuxtLink>
     <div class="p-4">
       <div class="mb-2">
         <div class="flex items-center gap-1">
           <UIcon name="i-mdi-calendar" />
-          {{ date }}
+          {{ createdAt }}
         </div>
         <div class="flex items-center gap-1 flex-wrap">
           <UIcon name="i-mdi-tag" />
@@ -23,7 +23,7 @@
       <h2 class="text-xl font-semibold group-hover:text-primary mb-1">
         <NuxtLink :to="path">{{ title }}</NuxtLink>
       </h2>
-      <p class="text-ellipsis line-clamp-2 text-base mb-2">{{ description }}</p>
+      <p class="text-ellipsis line-clamp-2 text-base mb-2">{{ summary }}</p>
       <NuxtLink :to="path" class="inline-flex items-center gap-1 text-primary group-hover:underline">
         <p>Read More</p>
         <UIcon name="i-mdi-arrow-right" />
@@ -34,21 +34,26 @@
 
 <script setup lang="ts">
 interface Props {
+  slug: string;
   title: string;
-  date: string;
-  description: string;
-  image: string;
-  alt: string;
+  createdAt: string;
+  summary: string;
+  thumbnail: string;
+  thumbnailAlt: string;
   tags: string[];
 }
-withDefaults(defineProps<Props>(), {
-  title: 'no-title',
-  date: 'no-date',
-  description: 'no-description',
-  image: '',
-  alt: 'no-alt',
+
+const props = withDefaults(defineProps<Props>(), {
+  slug: '/',
+  title: 'no title',
+  createdAt: 'no date',
+  summary: 'no summary',
+  thumbnail: '',
+  thumbnailAlt: 'no-alt',
   tags: () => [],
 });
+
+const path = computed(() => `/blogs/${props.slug}`);
 </script>
 
 <style scoped></style>

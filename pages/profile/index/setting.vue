@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <UForm :state="state" class="space-y-4" @submit="handleSubmit">
-      <UFormGroup label="Email" name="email">
-        <UInput v-model="state.email" disabled />
-      </UFormGroup>
-      <UFormGroup label="Name" name="name">
-        <UInput v-model="state.name" />
-      </UFormGroup>
-      <UFormGroup label="Birthday" name="birthday">
-        <UInput v-model="state.birthday" />
-      </UFormGroup>
-      <UFormGroup label="Phone number" name="phone">
-        <UInput v-model="state.phone" />
-      </UFormGroup>
-      <UButton type="submit" :loading="isSubmitLoading">Submit</UButton>
-    </UForm>
-  </div>
+  <UForm :state="state" class="space-y-4" @submit="handleSubmit">
+    <UFormGroup label="Email" name="email">
+      <UInput v-model="state.email" disabled />
+    </UFormGroup>
+    <UFormGroup label="Name" name="name">
+      <UInput v-model="state.name" />
+    </UFormGroup>
+    <UFormGroup label="Birthday" name="birthday">
+      <UInput v-model="state.birthday" />
+    </UFormGroup>
+    <UFormGroup label="Phone number" name="phone">
+      <UInput v-model="state.phone" />
+    </UFormGroup>
+    <UButton type="submit" :loading="isSubmitLoading">Submit</UButton>
+  </UForm>
 </template>
 
 <script setup lang="ts">

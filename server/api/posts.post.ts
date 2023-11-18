@@ -1,5 +1,7 @@
-import { User } from '~/server/models/User';
 import { getServerSession } from '#auth';
+import { User } from '~/server/models/User';
+import { Post } from '~/server/models/Post';
+import { slugify } from '~/utils';
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event);
@@ -11,7 +13,14 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     throw createError({ statusMessage: 'Unauthenticated', statusCode: 403 });
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { password, ...anotherUserFields } = user.toObject();
-  return anotherUserFields;
+  const body = await readBody(event);
+  return await Post.create({
+    slug: slugify(body?.title),
+    title: body?.title,
+    content: body?.content,
+    thumbnail: body?.thumbnail,
+    summary: body?.summary,
+    tags: body?.tags,
+    author: user._id,
+  });
 });

@@ -4,15 +4,14 @@
       <h2 class="section-title">Recent Post</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <template v-if="data?.length">
-          <template v-for="post in data" :key="post.title">
+          <template v-for="post in data" :key="post._id">
             <BlogVertical
-              :path="post._path"
+              :slug="post.slug"
               :title="post.title"
-              :date="post.date"
-              :description="post.description"
-              :image="post.image"
-              :alt="post.alt"
-              :og-image="post.ogImage"
+              :created-at="post.createdAt"
+              :summary="post.summary"
+              :thumbnail="post.thumbnail"
+              :thumbnail-alt="post.title"
               :tags="post.tags"
             />
           </template>
@@ -32,9 +31,7 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useAsyncData('recent-post', () =>
-  queryContent('/blogs').where({ published: true }).limit(3).sort({ _id: -1 }).find(),
-);
+const { data } = await useFetch('/api/posts');
 </script>
 
 <style scoped></style>

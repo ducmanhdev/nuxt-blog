@@ -11,7 +11,7 @@
       <h4 class="text-xl font-semibold group-hover:text-primary mb-1">
         <NuxtLink :to="to">{{ title }}</NuxtLink>
       </h4>
-      <p class="text-ellipsis line-clamp-2 text-base mb-3">{{ description }}</p>
+      <p class="text-ellipsis line-clamp-2 text-base mb-3">{{ summary }}</p>
       <div class="flex items-center flex-wrap gap-y-2 gap-x-4 mb-3">
         <div class="flex items-center gap-1">
           <UIcon name="i-mdi-calendar" />
@@ -38,7 +38,7 @@ import dayjs from 'dayjs';
 interface Props {
   slug: string;
   title: string;
-  description: string;
+  summary: string;
   createdAt: string;
   thumbnail: string;
   thumbnailAlt: string;

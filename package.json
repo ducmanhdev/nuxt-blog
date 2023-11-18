@@ -19,11 +19,11 @@
     "@sidebase/nuxt-auth": "0.6.0-rc.1",
     "@tailwindcss/typography": "^0.5.10",
     "@types/bcrypt": "^5.0.2",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "nuxt": "^3.8.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.1.0"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
@@ -37,7 +37,7 @@
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.10",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.0",
+    "mongoose": "^8.0.1",
     "next-auth": "^4.21.1",
     "nuxt-server-utils": "^0.0.7",
     "zod": "^3.22.4"

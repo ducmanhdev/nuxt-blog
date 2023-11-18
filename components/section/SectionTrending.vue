@@ -3,15 +3,14 @@
     <div class="container">
       <h2 class="section-title">Trending Post</h2>
       <div v-if="data?.length" class="space-y-4">
-        <template v-for="post in data" :key="post.title">
+        <template v-for="post in data" :key="post._id">
           <BlogHorizontal
-            :path="post._path"
+            :slug="post.slug"
             :title="post.title"
-            :date="post.date"
-            :description="post.description"
-            :image="post.image"
-            :alt="post.alt"
-            :og-image="post.ogImage"
+            :created-at="post.createdAt"
+            :summary="post.summary"
+            :thumbnail="post.thumbnail"
+            :thumbnail-alt="post.title"
             :tags="post.tags"
           />
         </template>
@@ -30,9 +29,7 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useAsyncData('trending-post', () =>
-  queryContent('/blogs').where({ published: true }).limit(3).sort({ _id: 1 }).find(),
-);
+const { data } = await useFetch('/api/posts');
 </script>
 
 <style scoped></style>

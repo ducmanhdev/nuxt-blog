@@ -9,7 +9,7 @@
               :slug="post.slug"
               :title="post.title"
               :created-at="post.createdAt"
-              :description="post.description"
+              :summary="post.description"
               :thumbnail="post.thumbnail"
               :thumbnail-alt="post.thumbnailAlt"
               :tags="post.tags"
