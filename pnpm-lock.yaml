@@ -44,9 +44,6 @@ dependencies:
   next-auth:
     specifier: ^4.21.1
     version: 4.21.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
-  nuxt-server-utils:
-    specifier: ^0.0.7
-    version: 0.0.7
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -8178,15 +8175,6 @@ packages:
       - vue
       - webpack
     dev: true
-
-  /nuxt-server-utils@0.0.7:
-    resolution: {integrity: sha512-oWuYr2yXNvS7f2xkAluNIUHU+Fxnhjop3Dk1IW2FbpDCp46xN/lcDczguKq+ZLLimwtX0VWfjbhEZfI4UsSVNA==}
-    dependencies:
-      '@nuxt/kit': 3.8.1
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: false
 
   /nuxt-simple-robots@3.1.9(@nuxt/devtools@1.0.2)(@vue/compiler-core@3.3.8)(nuxt@3.8.1)(postcss@8.4.31)(vite@4.5.0)(vue@3.3.8)(webpack@5.89.0):
     resolution: {integrity: sha512-JpXLbuPh3gXu7Sfy+6WJcDCaPpshFbn7aDQtfIOiuKXqxw2zY/BopBeJWQRzPBAcWc/R4S0yxRVFxK8BsbT5aA==}
