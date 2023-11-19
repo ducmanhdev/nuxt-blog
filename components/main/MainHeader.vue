@@ -5,7 +5,7 @@
       <nav class="text-sm sm:text-lg font-semibold">
         <ul class="flex items-center gap-3 sm:gap-6">
           <li>
-            <NuxtLink to="/blogs">Blogs</NuxtLink>
+            <NuxtLink to="/blog">Blogs</NuxtLink>
           </li>
           <li>
             <NuxtLink to="/categories">Categories</NuxtLink>

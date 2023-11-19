@@ -46,7 +46,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const to = computed(() => '/blogs/' + props.slug);
+const to = computed(() => `/blog/${props.slug}`);
 </script>
 
 <style scoped></style>

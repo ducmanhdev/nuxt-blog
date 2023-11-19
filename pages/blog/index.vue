@@ -1,7 +1,7 @@
 <template>
   <div class="py-10">
     <div class="container">
-      <h1 class="section-title">Blogs</h1>
+      <h1 class="section-title">Blog</h1>
       <div class="space-y-4">
         <template v-if="data?.length">
           <template v-for="post in data" :key="post.title">

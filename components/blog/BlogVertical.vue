@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<Props>(), {
   tags: () => [],
 });
 
-const path = computed(() => `/blogs/${props.slug}`);
+const path = computed(() => `/blog/${props.slug}`);
 </script>
 
 <style scoped></style>

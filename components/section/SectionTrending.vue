@@ -17,7 +17,7 @@
       </div>
       <BlogEmpty v-else />
       <div class="text-center mt-4">
-        <UButton to="/blogs">
+        <UButton to="/blog">
           <template #trailing>
             <UIcon name="i-heroicons-arrow-right-20-solid" />
           </template>

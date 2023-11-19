@@ -15,7 +15,7 @@
                   <NuxtLink to="/">Home</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/blogs">Blogs</NuxtLink>
+                  <NuxtLink to="/blog">Blogs</NuxtLink>
                 </li>
                 <li>
                   <NuxtLink to="/categories">Categories</NuxtLink>
