@@ -8,6 +8,7 @@ export interface PostDocument extends Document {
   tags: string[];
   author: string;
   createdAt: Date;
+  bookmarkBy: string[];
 }
 
 const PostSchema = new Schema({
@@ -39,6 +40,18 @@ const PostSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  upPoint: {
+    type: Number,
+    default: 0,
+  },
+  downPoint: {
+    type: Number,
+    default: 0,
+  },
+  bookmarkBy: {
+    type: [String],
+    default: 0,
   },
 });
 
