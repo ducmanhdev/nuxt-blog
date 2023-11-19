@@ -16,17 +16,30 @@
       </div>
       <UButton type="button" variant="link" label="Answer" />
     </div>
+    <div v-if="replies?.length" class="space-y-4 mt-4 pl-10">
+      <CommmentItem
+        v-for="reply in replies"
+        :key="reply.id"
+        :message="reply.message"
+        :user="reply.user"
+        :is-can-reply="false"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 interface Props {
   message: string;
-  replies: any[];
+  replies?: any[];
   user: any;
+  isCanReply?: boolean;
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  isCanReply: true,
+  replies: () => [],
+});
 </script>
 
 <style scoped></style>

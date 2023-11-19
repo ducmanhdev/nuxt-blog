@@ -5,7 +5,7 @@
         <aside>
           <BlogNavigation :post="data" />
         </aside>
-        <div>
+        <div v-if="data">
           <BlogHero
             :title="data?.title"
             :created-at="data?.createdAt"
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const { data } = await useFetch('/api/post', {
-  params: {
+  query: {
     slug: route.params.slug,
   },
 });
