@@ -81,6 +81,13 @@ const profileLinks = computed(() => [
   ],
   [
     {
+      label: 'Write a blog',
+      icon: 'i-heroicons-pencil-20-solid',
+      to: '/profile/write',
+    },
+  ],
+  [
+    {
       label: 'Sign out',
       icon: 'i-heroicons-arrow-left-on-rectangle-20-solid',
       click: handleSignOut,
