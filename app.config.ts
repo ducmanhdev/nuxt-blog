@@ -12,5 +12,8 @@ export default defineAppConfig({
         size: 'md',
       },
     },
+    pagination: {
+      wrapper: 'items-stretch',
+    },
   },
 });
