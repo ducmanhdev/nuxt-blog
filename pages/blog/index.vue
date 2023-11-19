@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 const page = ref(1);
-const { data } = useFetch('/api/posts');
+const { data } = await useFetch('/api/posts');
 </script>
 
 <style scoped></style>
