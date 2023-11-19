@@ -15,13 +15,14 @@
 
 <script setup lang="ts">
 const toast = useToast();
-const state = ref({
+const initialState = {
   title: '',
   summary: '',
   content: '',
   tags: ['nuxt', 'nuxt-content'],
   thumbnail: 'https://blog.nurriyad.xyz/_vercel/image?url=/blogs-img/blog4.webp&w=320&q=100',
-});
+};
+const state = ref({ ...initialState });
 
 const isSubmitLoading = ref(false);
 const handleSubmit = async () => {
@@ -35,6 +36,9 @@ const handleSubmit = async () => {
       title: 'Create successfully',
       color: 'green',
     });
+    state.value = {
+      ...initialState,
+    };
   } catch (error: any) {
     toast.add({
       title: error.message,
