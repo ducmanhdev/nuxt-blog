@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 export default <Partial<Config>>{
   darkMode: 'class',
@@ -21,5 +22,11 @@ export default <Partial<Config>>{
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    plugin(({ addVariant }) => {
+      addVariant('child', '& > *');
+      addVariant('child-hover', '& > *:hover');
+    }),
+  ],
 };
