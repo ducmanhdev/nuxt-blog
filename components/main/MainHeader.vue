@@ -4,11 +4,8 @@
       <NuxtLink to="/" class="text-base sm:text-2xl font-bold underline">Blog's</NuxtLink>
       <nav class="text-sm sm:text-lg font-semibold">
         <ul class="flex items-center gap-3 sm:gap-6">
-          <li>
-            <NuxtLink to="/blog">Blogs</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink to="/categories">Categories</NuxtLink>
+          <li v-for="link in navLinks" :key="link.to">
+            <NuxtLink :to="link.to" active-class="text-primary">{{ link.label }}</NuxtLink>
           </li>
           <li>
             <UDropdown v-if="data?.user" :items="profileLinks" :popper="{ placement: 'bottom-end' }" class="flex">
@@ -77,6 +74,7 @@ const profileLinks = computed(() => [
     {
       label: 'Bookmarks',
       icon: 'i-heroicons-bookmark-20-solid',
+      to: '/profile/bookmarks',
     },
   ],
   [
@@ -94,6 +92,17 @@ const profileLinks = computed(() => [
     },
   ],
 ]);
+
+const navLinks = [
+  {
+    label: 'Blogs',
+    to: '/blog',
+  },
+  {
+    label: 'Categories',
+    to: '/categories',
+  },
+];
 </script>
 
 <style scoped></style>
