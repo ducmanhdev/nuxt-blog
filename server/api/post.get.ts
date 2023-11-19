@@ -1,8 +1,8 @@
 import { Post } from '~/server/models/Post';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler((event) => {
   const query = getQuery(event);
-  return await Post.findOne({
+  return Post.findOne({
     slug: query?.slug,
   });
 });

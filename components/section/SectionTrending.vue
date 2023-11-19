@@ -2,8 +2,8 @@
   <section class="pb-10">
     <div class="container">
       <h2 class="section-title">Trending Post</h2>
-      <div v-if="data?.length" class="space-y-4">
-        <template v-for="post in data" :key="post._id">
+      <div v-if="data?.data?.length" class="space-y-4">
+        <template v-for="post in data?.data" :key="post._id">
           <BlogHorizontal
             :slug="post.slug"
             :title="post.title"
@@ -29,7 +29,11 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useFetch('/api/posts');
+const { data } = await useFetch('/api/posts', {
+  query: {
+    limit: 3,
+  },
+});
 </script>
 
 <style scoped></style>

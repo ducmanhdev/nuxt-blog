@@ -3,8 +3,8 @@
     <div class="container">
       <h2 class="section-title">Recent Post</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <template v-if="data?.length">
-          <template v-for="post in data" :key="post._id">
+        <template v-if="data?.data?.length">
+          <template v-for="post in data?.data" :key="post._id">
             <BlogVertical
               :slug="post.slug"
               :title="post.title"
@@ -31,7 +31,11 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useFetch('/api/posts');
+const { data } = await useFetch('/api/posts', {
+  query: {
+    limit: 3,
+  },
+});
 </script>
 
 <style scoped></style>
