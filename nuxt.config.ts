@@ -9,8 +9,6 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     },
-    // pageTransition: { name: 'page', mode: 'out-in' },
-    // layoutTransition: { name: 'layout', mode: 'out-in' },
   },
   imports: {
     dirs: ['./constants'],
@@ -22,7 +20,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/ui',
     '@sidebase/nuxt-auth',
-    'nuxt-server-utils',
   ],
   colorMode: {
     preference: 'system',
@@ -33,12 +30,8 @@ export default defineNuxtConfig({
   ui: {
     icons: ['mdi', 'ion'],
   },
-  nuxtServerUtils: {
-    enabled: true, // default3
-    enableDevTools: true, // default
-    mongodbUri: process.env.MONGODB_URI,
-  },
   auth: {
+    baseURL: 'http://localhost:3000',
     globalAppMiddleware: false,
     provider: {
       type: 'authjs',
