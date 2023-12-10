@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
+    mongodbUri: process.env.MONGODB_URI,
   },
   app: {
     head: {
@@ -21,6 +22,9 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@sidebase/nuxt-auth',
   ],
+  nitro: {
+    plugins: ['~/server/plugins/mongodb.ts'],
+  },
   colorMode: {
     preference: 'system',
     fallback: 'light',
