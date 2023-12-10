@@ -17,7 +17,7 @@
           <article class="content" v-html="data?.content"></article>
         </div>
       </div>
-      <Comment :post-id="data._id" />
+      <Comment :reviews="data.reviews" :post-id="data._id" />
     </div>
   </div>
 </template>
@@ -29,4 +29,5 @@ const { data } = await useFetch('/api/post', {
     slug: route.params.slug,
   },
 });
+console.log(data.value);
 </script>

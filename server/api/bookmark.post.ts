@@ -1,4 +1,4 @@
-import { Post } from '~/server/models/Post';
+import Post from '~/server/models/Post';
 import { validateUser } from '~/server/helpers';
 
 const removeBookmark = (bookmarks: string[], userId: string) => {

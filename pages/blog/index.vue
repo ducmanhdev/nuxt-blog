@@ -16,7 +16,7 @@
             />
           </template>
           <div class="flex justify-center">
-            <UPagination v-model="page" :page-count="data.metaData.itemsPerPage" :total="data.metaData.totalItems" />
+            <UPagination v-model="page" :page-count="data.metadata.itemsPerPage" :total="data.metadata.totalItems" />
           </div>
         </template>
         <BlogEmpty v-else />

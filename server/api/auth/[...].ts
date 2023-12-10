@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { NuxtAuthHandler } from '#auth';
-import { User } from '~/server/models/User';
+import User from '~/server/models/User';
 
 export default NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,

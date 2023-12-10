@@ -32,6 +32,9 @@ watch(
   (newPost) => {
     isBookmark.value = newPost?.bookmarkBy.includes(data.value?.user?._id);
   },
+  {
+    immediate: true,
+  },
 );
 
 const isBookmarkLoading = ref(false);

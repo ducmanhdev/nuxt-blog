@@ -1,4 +1,4 @@
-import { User } from '~/server/models/User';
+import User from '~/server/models/User';
 import { validateUser } from '~/server/helpers';
 
 export default defineEventHandler(async (event) => {

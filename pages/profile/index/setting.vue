@@ -47,8 +47,7 @@ const handleSubmit = async () => {
   }
 };
 
-const headers = useRequestHeaders(['cookie']) as HeadersInit;
-const { data } = await useFetch('/api/profile', { headers });
+const { data } = await useFetch('/api/profile');
 watchEffect(() => {
   if (!data.value) return;
   state.value.email = data.value.email;
