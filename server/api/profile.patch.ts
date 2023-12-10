@@ -1,19 +1,10 @@
 import { User } from '~/server/models/User';
-import { getServerSession } from '#auth';
+import { validateUser } from '~/server/helpers';
 
 export default defineEventHandler(async (event) => {
-  const session = await getServerSession(event);
-  const userId = session?.user?._id;
-  if (!userId) {
-    throw createError({ statusMessage: 'Unauthenticated', statusCode: 403 });
-  }
-  const user = await User.findById(userId);
-  if (!user) {
-    throw createError({ statusMessage: 'Unauthenticated', statusCode: 403 });
-  }
-
+  const user = await validateUser(event);
   const body = await readBody(event);
-  await User.findByIdAndUpdate(userId, {
+  await User.findByIdAndUpdate(user._id, {
     $set: {
       name: body.name,
       birthday: body.birthday,

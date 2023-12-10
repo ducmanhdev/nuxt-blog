@@ -1,30 +1,35 @@
-import { getServerSession } from '#auth';
-import { User } from '~/server/models/User';
 import { Post } from '~/server/models/Post';
+import { validateUser } from '~/server/helpers';
+
+const removeBookmark = (bookmarks: string[], userId: string) => {
+  return bookmarks.filter((id) => id !== userId);
+};
+
+const addBookmark = (bookmarks: string[], userId: string) => {
+  bookmarks.push(userId);
+  return bookmarks;
+};
 
 export default defineEventHandler(async (event) => {
-  const session = await getServerSession(event);
-  const userId = session?.user?._id;
-  if (!userId) {
-    throw createError({ statusMessage: 'Unauthenticated', statusCode: 403 });
-  }
-  const user = await User.findById(userId);
-  if (!user) {
-    throw createError({ statusMessage: 'Unauthenticated', statusCode: 403 });
-  }
+  const user = await validateUser(event);
+
   const body = await readBody(event);
   if (!body.post_id) {
     throw createError({ statusMessage: 'Missing post id', statusCode: 400 });
   }
+
   const doc = await Post.findById(body.post_id);
   if (!doc) {
-    throw createError({ statusMessage: 'Post not found', statusCode: 404 });
+    throw createError({ statusMessage: 'Post not found', statusCode: 400 });
   }
-  if (doc.bookmarkBy.includes(userId)) {
-    doc.bookmarkBy = doc.bookmarkBy.filter((id) => id !== userId);
+
+  if (doc.bookmarkBy.includes(user._id)) {
+    doc.bookmarkBy = removeBookmark(doc.bookmarkBy, user._id);
   } else {
-    doc.bookmarkBy.push(userId);
+    doc.bookmarkBy = addBookmark(doc.bookmarkBy, user._id);
   }
+
   await doc.save();
+
   return { statusMessage: 'Success', statusCode: 200 };
 });
