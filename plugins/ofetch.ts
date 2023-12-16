@@ -8,13 +8,9 @@ export default defineNuxtPlugin((_nuxtApp) => {
     onResponseError({ request, response }) {
       // Log error
       console.log('[fetch response error]', request, response.status, response.body);
-      if (response.status === 403) {
+      if (response.status === 401 || response.status === 403) {
         navigateTo('/login');
       }
-    },
-    onRequestError({ request, error }) {
-      // Log error
-      console.log('[fetch request error]', request, error);
     },
   });
 });

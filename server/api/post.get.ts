@@ -4,5 +4,5 @@ export default defineEventHandler((event) => {
   const query = getQuery(event);
   return Post.findOne({
     slug: query?.slug,
-  }).populate('reviews');
+  }).populate('comments');
 });

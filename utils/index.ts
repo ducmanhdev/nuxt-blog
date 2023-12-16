@@ -13,3 +13,16 @@ export const slugify = (str: string) => {
     .replace(SPACES, '-') // replace spaces with hyphens
     .replace(CONSECUTIVE_HYPHENS, '-'); // remove consecutive hyphens
 };
+
+export const handleScrollToEl = (querySelector: string) => {
+  if (!window) return;
+
+  const el = document.querySelector(querySelector) as HTMLElement;
+  if (!el) return;
+
+  const offset = document.getElementById('main-header')?.offsetHeight || 0;
+  window.scrollTo({
+    top: el.offsetTop - offset,
+    behavior: 'smooth',
+  });
+};

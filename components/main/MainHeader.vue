@@ -1,5 +1,5 @@
 <template>
-  <header class="color-theme sticky top-0 z-50 py-4 shadow border-b">
+  <header id="main-header" class="color-theme sticky top-0 z-50 py-4 shadow border-b">
     <div class="container flex items-center justify-between">
       <NuxtLink to="/" class="text-base sm:text-2xl font-bold underline">Blog's</NuxtLink>
       <nav class="text-sm sm:text-lg font-semibold">

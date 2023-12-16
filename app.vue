@@ -9,30 +9,37 @@
       </div>
     </main>
     <MainFooter class="shrink-0" />
+    <Teleport to="body">
+      <UButton
+        v-if="currentScrollPosition > 100"
+        icon="i-mdi-arrow-up"
+        color="primary"
+        square
+        :ui="{ rounded: 'rounded-full' }"
+        class="fixed bottom-4 right-4"
+        @click="handleScrollToTop"
+      />
+    </Teleport>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const handleScrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+};
 
-<style>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
+const currentScrollPosition = ref(0);
+const handleTrackWindowScrollPosition = () => {
+  currentScrollPosition.value = window.scrollY;
+};
 
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-
-.layout-enter-active,
-.layout-leave-active {
-  transition: all 0.4s;
-}
-
-.layout-enter-from,
-.layout-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-</style>
+onMounted(() => {
+  window.addEventListener('scroll', handleTrackWindowScrollPosition);
+});
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleTrackWindowScrollPosition);
+});
+</script>
+<style></style>

@@ -1,4 +1,4 @@
-import { Document, Schema, model } from 'mongoose';
+import { Document, Schema, model, Query } from 'mongoose';
 import { slugify } from '~/utils';
 
 export interface PostDocument extends Document {
@@ -7,12 +7,29 @@ export interface PostDocument extends Document {
   thumbnail: string;
   summary: string;
   tags: string[];
-  user: typeof Schema.ObjectId;
+  author: Schema.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-  bookmarkBy: string[];
-  reviews: any;
+  bookmarkBy: Schema.Types.ObjectId[];
+  comments: any;
+  votes: any;
 }
+
+const BookmarkedBySchema = new Schema({
+  type: Schema.ObjectId,
+});
+
+const VoteSchema = new Schema({
+  userId: {
+    type: Schema.ObjectId,
+    required: [true, 'Vote must belong to a user'],
+  },
+  value: {
+    type: Number,
+    enum: [-1, 1],
+    required: [true, 'Vote must have a value'],
+  },
+});
 
 const PostSchema = new Schema(
   {
@@ -36,22 +53,13 @@ const PostSchema = new Schema(
     tags: {
       type: [String],
     },
-    user: {
-      type: String,
-      required: true,
+    author: {
+      type: Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'Post must belong to a user'],
     },
-    upPoint: {
-      type: Number,
-      default: 0,
-    },
-    downPoint: {
-      type: Number,
-      default: 0,
-    },
-    bookmarkBy: {
-      type: [String],
-      default: 0,
-    },
+    bookmarkBy: [BookmarkedBySchema],
+    votes: [VoteSchema],
   },
   {
     timestamps: true, // adds createdAt and updatedAt fields
@@ -64,10 +72,18 @@ const PostSchema = new Schema(
   },
 );
 
-PostSchema.virtual('reviews', {
-  ref: 'Review',
+PostSchema.virtual('comments', {
+  ref: 'Comment',
   foreignField: 'post',
   localField: '_id',
+});
+
+PostSchema.pre(/^find/, function (this: Query<any, any>, next: Function) {
+  this.populate({
+    path: 'author',
+    select: 'name id',
+  });
+  next();
 });
 
 PostSchema.pre('save', function (next) {
