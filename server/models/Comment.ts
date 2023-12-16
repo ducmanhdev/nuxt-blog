@@ -1,5 +1,10 @@
 import { Query, Document, Schema, model } from 'mongoose';
 
+interface Vote {
+  userId: Schema.Types.ObjectId;
+  value: 1 | -1;
+}
+
 interface CommentDocument extends Document {
   content: string;
   post: Schema.Types.ObjectId;
@@ -7,12 +12,12 @@ interface CommentDocument extends Document {
   createdAt: Date;
   updatedAt: Date;
   replies: Schema.Types.ObjectId[];
-  votes: any;
+  votes: Vote[];
 }
 
 const VoteSchema = new Schema({
   userId: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     required: [true, 'Vote must belong to a user'],
   },
   value: {
@@ -29,18 +34,18 @@ const CommentSchema = new Schema(
       required: [true, 'Content can not be empty'],
     },
     post: {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Post',
       required: [true, 'Comment must belong to a post'],
     },
     user: {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'Comment must belong to a post'],
     },
     replies: [
       {
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Comment',
       },
     ],

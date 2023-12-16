@@ -1,6 +1,11 @@
 import { Document, Schema, model, Query } from 'mongoose';
 import { slugify } from '~/utils';
 
+interface Vote {
+  userId: Schema.Types.ObjectId;
+  value: 1 | -1;
+}
+
 export interface PostDocument extends Document {
   title: string;
   content: string;
@@ -12,16 +17,16 @@ export interface PostDocument extends Document {
   updatedAt: Date;
   bookmarkBy: Schema.Types.ObjectId[];
   comments: any;
-  votes: any;
+  votes: Vote[];
 }
 
 const BookmarkedBySchema = new Schema({
-  type: Schema.ObjectId,
+  type: Schema.Types.ObjectId,
 });
 
 const VoteSchema = new Schema({
   userId: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     required: [true, 'Vote must belong to a user'],
   },
   value: {
@@ -54,7 +59,7 @@ const PostSchema = new Schema(
       type: [String],
     },
     author: {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'Post must belong to a user'],
     },
