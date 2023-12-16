@@ -1,23 +1,23 @@
-import { Document, Schema, model, Query } from 'mongoose';
+import { Schema, model, Query, type Types } from 'mongoose';
 import { slugify } from '~/utils';
 
-interface Vote {
-  userId: Schema.Types.ObjectId;
+interface IVote {
+  userId: Types.ObjectId;
   value: 1 | -1;
 }
 
-export interface PostDocument extends Document {
+export interface IPost {
   title: string;
   content: string;
   thumbnail: string;
   summary: string;
   tags: string[];
-  author: Schema.Types.ObjectId;
+  author: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-  bookmarkBy: Schema.Types.ObjectId[];
+  bookmarkBy: Types.ObjectId[];
   comments: any;
-  votes: Vote[];
+  votes: IVote[];
 }
 
 const BookmarkedBySchema = new Schema({
@@ -96,5 +96,5 @@ PostSchema.pre('save', function (next) {
   next();
 });
 
-const Post = model<PostDocument>('Post', PostSchema);
+const Post = model<IPost>('Post', PostSchema);
 export default Post;

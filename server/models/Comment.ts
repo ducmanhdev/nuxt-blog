@@ -1,18 +1,18 @@
-import { Query, Document, Schema, model } from 'mongoose';
+import { Query, Schema, model, type Types } from 'mongoose';
 
-interface Vote {
-  userId: Schema.Types.ObjectId;
+interface IVote {
+  userId: Types.ObjectId;
   value: 1 | -1;
 }
 
-interface CommentDocument extends Document {
+interface IComment {
   content: string;
-  post: Schema.Types.ObjectId;
-  user: Schema.Types.ObjectId;
+  post: Types.ObjectId;
+  user: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-  replies: Schema.Types.ObjectId[];
-  votes: Vote[];
+  replies: Types.ObjectId[];
+  votes: IVote[];
 }
 
 const VoteSchema = new Schema({
@@ -72,5 +72,5 @@ CommentSchema.pre(/^find/, function (this: Query<any, any>, next: Function) {
   next();
 });
 
-const Comment = model<CommentDocument>('Comment', CommentSchema);
+const Comment = model<IComment>('Comment', CommentSchema);
 export default Comment;
