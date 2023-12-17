@@ -67,6 +67,9 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.6)
+  '@types/async':
+    specifier: ^3.2.24
+    version: 3.2.24
   '@types/bcrypt':
     specifier: ^5.0.2
     version: 5.0.2
@@ -2719,6 +2722,10 @@ packages:
       jsonfile: 5.0.0
       twemoji-parser: 14.0.0
       universalify: 0.1.2
+    dev: true
+
+  /@types/async@3.2.24:
+    resolution: {integrity: sha512-8iHVLHsCCOBKjCF2KwFe0p9Z3rfM9mL+sSP8btyR5vTjJRAqpBYD28/ZLgXPf0pjG1VxOvtCV/BgXkQbpSe8Hw==}
     dev: true
 
   /@types/bcrypt@5.0.2:
