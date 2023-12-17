@@ -1,9 +1,15 @@
 import Comment from '~/server/models/Comment';
+import APIFeatures from '~/utils/api-features';
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  return Comment.find({
-    postId: query.postId,
+  const features = new APIFeatures(Comment.find(), {
+    ...query,
     isReply: false,
-  }).sort({ createdAt: -1 });
+  })
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  return features.query;
 });

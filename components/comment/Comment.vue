@@ -11,7 +11,8 @@
       </UForm>
     </template>
     <template #default>
-      <div v-if="comments?.length" class="divide-y">
+      <div v-if="getCommentsError" class="text-error text-center">Error: {{ getCommentsError?.message }}</div>
+      <div v-else-if="comments?.length" class="divide-y child:py-4 child-first:pt-0 child-last:pb-0">
         <CommentItem
           v-for="comment in comments"
           :id="comment.id"
@@ -22,10 +23,13 @@
           :replies="comment.replies"
           :created-at="comment.createdAt"
           :votes="comment.votes"
-          class="py-4 first:pt-0 last:pb-0"
-          @refresh-comments="refreshComments"
+          :refresh-comments-fn="refreshComments"
         />
+        <div class="text-center">
+          <UButton variant="ghost" :loading="isLoadMoreLoading" block @click="handleLoadMoreComment">Read more</UButton>
+        </div>
       </div>
+      <div v-else class="text-center">No comments yet</div>
     </template>
   </UCard>
 </template>
@@ -41,23 +45,19 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const page = ref(1);
+const DEFAULT_PER_PAGE = 10;
+const perPage = ref(DEFAULT_PER_PAGE);
 const {
   data: comments,
   pending,
   refresh: refreshComments,
-  error,
-} = useLazyFetch('/api/comments', {
+  error: getCommentsError,
+} = await useLazyFetch('/api/comments', {
   query: {
     postId: props.postId,
-    page,
-    perPage: 10,
+    page: 1,
+    limit: perPage,
   },
-  watch: [page],
-});
-
-watchEffect(() => {
-  console.log(comments.value);
 });
 
 const state = ref({
@@ -86,6 +86,21 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
     });
   } finally {
     isSubmitLoading.value = false;
+  }
+};
+
+const isLoadMoreLoading = ref(false);
+const handleLoadMoreComment = async () => {
+  try {
+    isLoadMoreLoading.value = true;
+    perPage.value += DEFAULT_PER_PAGE;
+    await refreshComments();
+  } catch (error: any) {
+    toast.add({
+      title: error.message,
+    });
+  } finally {
+    isLoadMoreLoading.value = false;
   }
 };
 </script>

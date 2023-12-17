@@ -13,6 +13,7 @@
         <UButton
           size="sm"
           icon="i-mdi-chevron-up"
+          :loading="isVoteLoadingValue === 1"
           :color="currentVoteState === 1 ? 'primary' : 'gray'"
           @click="handleVote(1)"
         />
@@ -20,6 +21,7 @@
         <UButton
           size="sm"
           icon="i-mdi-chevron-down"
+          :loading="isVoteLoadingValue === -1"
           :color="currentVoteState === -1 ? 'primary' : 'gray'"
           @click="handleVote(-1)"
         />
@@ -56,6 +58,7 @@
         :content="comment.content"
         :created-at="comment.createdAt"
         :votes="comment.votes"
+        :refresh-comments-fn="props.refreshCommentsFn"
         :is-can-reply="false"
       />
     </div>
@@ -79,18 +82,13 @@ interface Props {
   createdAt: string;
   isCanReply?: boolean;
   votes: any[];
+  refreshCommentsFn: () => void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   replies: () => [],
   isCanReply: true,
 });
-
-interface Emits {
-  (e: 'refreshComments'): void;
-}
-
-const emit = defineEmits<Emits>();
 
 const isShowReplyForm = ref(false);
 const handleShowReplyComment = () => {
@@ -121,7 +119,7 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
     });
     state.value.content = '';
     isShowReplyForm.value = false;
-    emit('refreshComments');
+    props.refreshCommentsFn();
   } catch (error: any) {
     toast.add({
       title: error.message,
@@ -136,8 +134,11 @@ const currentVoteState = computed(() => props.votes.find((vote: any) => vote.use
 const voteCount = computed(() =>
   props.votes.map((vote: any) => vote.value).reduce((total, current) => total + current, 0),
 );
+
+const isVoteLoadingValue = ref<false | 1 | -1>(false);
 const handleVote = async (value: 1 | -1) => {
   try {
+    isVoteLoadingValue.value = value;
     await $fetch('/api/vote-comment', {
       method: 'POST',
       body: {
@@ -145,10 +146,13 @@ const handleVote = async (value: 1 | -1) => {
         value,
       },
     });
+    props.refreshCommentsFn();
   } catch (error: any) {
     toast.add({
       title: error.message,
     });
+  } finally {
+    isVoteLoadingValue.value = false;
   }
 };
 </script>
