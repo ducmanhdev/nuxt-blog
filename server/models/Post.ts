@@ -16,7 +16,6 @@ export interface IPost {
   createdAt: Date;
   updatedAt: Date;
   bookmarkBy: Types.ObjectId[];
-  comments: any;
   votes: IVote[];
 }
 
@@ -77,11 +76,11 @@ const PostSchema = new Schema(
   },
 );
 
-PostSchema.virtual('comments', {
-  ref: 'Comment',
-  foreignField: 'post',
-  localField: '_id',
-});
+// PostSchema.virtual('comments', {
+//   ref: 'Comment',
+//   foreignField: 'post',
+//   localField: '_id',
+// });
 
 PostSchema.pre(/^find/, function (this: Query<any, any>, next: Function) {
   this.populate({

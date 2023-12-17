@@ -17,7 +17,7 @@
           <article class="content" v-html="data?.content"></article>
         </div>
       </div>
-      <Comment :comments="data.comments" :post-id="data._id" />
+      <Comment :post-id="data.id" />
     </div>
   </div>
 </template>
@@ -29,4 +29,11 @@ const { data } = await useFetch('/api/post', {
     slug: route.params.slug,
   },
 });
+if (!data.value) {
+  showError({
+    statusCode: 404,
+    statusMessage: 'Post not found',
+  });
+}
+console.log(data.value);
 </script>

@@ -7,12 +7,13 @@ interface IVote {
 
 interface IComment {
   content: string;
-  post: Types.ObjectId;
-  user: Types.ObjectId;
+  postId: Types.ObjectId;
+  author: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-  replies: Types.ObjectId[];
   votes: IVote[];
+  replies: Types.ObjectId[];
+  isReply: boolean;
 }
 
 const VoteSchema = new Schema({
@@ -33,15 +34,14 @@ const CommentSchema = new Schema(
       type: String,
       required: [true, 'Content can not be empty'],
     },
-    post: {
+    postId: {
       type: Schema.Types.ObjectId,
-      ref: 'Post',
       required: [true, 'Comment must belong to a post'],
     },
-    user: {
+    author: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, 'Comment must belong to a post'],
+      required: [true, 'Comment must belong to a user'],
     },
     replies: [
       {
@@ -49,6 +49,10 @@ const CommentSchema = new Schema(
         ref: 'Comment',
       },
     ],
+    isReply: {
+      type: Boolean,
+      default: false,
+    },
     votes: [VoteSchema],
   },
   {
@@ -64,7 +68,7 @@ const CommentSchema = new Schema(
 
 CommentSchema.pre(/^find/, function (this: Query<any, any>, next: Function) {
   this.populate({
-    path: 'user',
+    path: 'author',
     select: 'name id',
   }).populate({
     path: 'replies',

@@ -11,18 +11,19 @@
       </UForm>
     </template>
     <template #default>
-      <div class="divide-y">
+      <div v-if="comments?.length" class="divide-y">
         <CommentItem
-          v-for="comment in commentsFiltered"
+          v-for="comment in comments"
           :id="comment.id"
           :key="comment.id"
-          :user="comment.user"
-          :post-id="comment.post"
+          :author="comment.author"
+          :post-id="comment.postId"
           :content="comment.content"
           :replies="comment.replies"
           :created-at="comment.createdAt"
           :votes="comment.votes"
           class="py-4 first:pt-0 last:pb-0"
+          @refresh-comments="refreshComments"
         />
       </div>
     </template>
@@ -33,17 +34,30 @@
 import type { FormSubmitEvent } from '#ui/types';
 import { z } from 'zod';
 
+const toast = useToast();
+
 interface Props {
   postId: string;
-  comments: any[];
 }
 
 const props = defineProps<Props>();
-const toast = useToast();
+const page = ref(1);
+const {
+  data: comments,
+  pending,
+  refresh: refreshComments,
+  error,
+} = useLazyFetch('/api/comments', {
+  query: {
+    postId: props.postId,
+    page,
+    perPage: 10,
+  },
+  watch: [page],
+});
 
-const commentsFiltered = computed(() => {
-  const replies = props.comments.map((comment: any) => comment.replies.map((reply: any) => reply.id)).flat();
-  return props.comments.filter((comment: any) => !replies.includes(comment.id));
+watchEffect(() => {
+  console.log(comments.value);
 });
 
 const state = ref({
@@ -65,6 +79,7 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
       },
     });
     state.value.content = '';
+    refreshComments();
   } catch (error: any) {
     toast.add({
       title: error.message,

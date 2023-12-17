@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   return await Comment.create({
     content: body.content,
-    post: body.postId,
-    user: user._id,
+    postId: body.postId,
+    author: user._id,
   });
 });

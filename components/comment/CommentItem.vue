@@ -1,9 +1,9 @@
 <template>
   <div class="space-y-2">
     <div class="flex items-center gap-4">
-      <UAvatar size="lg" :src="user.avatar" />
+      <UAvatar size="lg" :src="author.avatar" />
       <div class="">
-        <p class="font-semibold">{{ user.name }}</p>
+        <p class="font-semibold">{{ author.name }}</p>
         <p class="text-sm text-gray-500">{{ dayjs(createdAt).fromNow() }}</p>
       </div>
     </div>
@@ -51,8 +51,8 @@
         v-for="comment in replies"
         :id="comment.id"
         :key="comment.id"
-        :user="comment.user"
-        :post-id="comment.post"
+        :author="comment.author"
+        :post-id="comment.postId"
         :content="comment.content"
         :created-at="comment.createdAt"
         :votes="comment.votes"
@@ -75,7 +75,7 @@ interface Props {
   postId: string;
   content: string;
   replies?: Props[];
-  user: any;
+  author: any;
   createdAt: string;
   isCanReply?: boolean;
   votes: any[];
@@ -85,6 +85,12 @@ const props = withDefaults(defineProps<Props>(), {
   replies: () => [],
   isCanReply: true,
 });
+
+interface Emits {
+  (e: 'refreshComments'): void;
+}
+
+const emit = defineEmits<Emits>();
 
 const isShowReplyForm = ref(false);
 const handleShowReplyComment = () => {
@@ -115,6 +121,7 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
     });
     state.value.content = '';
     isShowReplyForm.value = false;
+    emit('refreshComments');
   } catch (error: any) {
     toast.add({
       title: error.message,

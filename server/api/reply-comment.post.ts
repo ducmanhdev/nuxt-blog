@@ -6,8 +6,9 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const reply = await Comment.create({
     content: body.content,
-    post: body.postId,
-    user: user._id,
+    postId: body.postId,
+    author: user._id,
+    isReply: true,
   });
   return Comment.findByIdAndUpdate(body.originalCommentId, { $push: { replies: reply._id } });
 });
