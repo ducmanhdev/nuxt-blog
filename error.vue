@@ -18,8 +18,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-watchEffect(() => {
-  console.log(props.error);
-});
+
 const handleError = () => clearError({ redirect: '/' });
 </script>
