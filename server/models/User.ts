@@ -35,6 +35,10 @@ const UserSchema = new Schema({
     unique: true,
     trim: true,
   },
+  gender: {
+    type: 'String',
+    enum: ['Male', 'Female', 'Other'],
+  },
 });
 
 const User = model<IUser>('User', UserSchema);

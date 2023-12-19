@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
       name: body.name,
       birthday: body.birthday,
       phone: body.phone,
+      gender: body.gender,
     },
   });
   return true;

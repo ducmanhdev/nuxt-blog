@@ -12,17 +12,37 @@
     <UFormGroup label="Phone number" name="phone">
       <UInput v-model="state.phone" />
     </UFormGroup>
+    <UFormGroup label="Gender" name="gender">
+      <URadioGroup v-model="state.gender" :options="genderOptions" />
+    </UFormGroup>
     <UButton type="submit" :loading="isSubmitLoading">Submit</UButton>
   </UForm>
 </template>
 
 <script setup lang="ts">
 const toast = useToast();
+
+const genderOptions = [
+  {
+    value: 'Male',
+    label: 'Male',
+  },
+  {
+    value: 'Female',
+    label: 'Female',
+  },
+  {
+    value: 'Other',
+    label: 'Other',
+  },
+];
+
 const state = ref({
   email: '',
   name: '',
   birthday: '',
   phone: '',
+  gender: '',
 });
 
 const isSubmitLoading = ref(false);
@@ -54,6 +74,7 @@ watchEffect(() => {
   state.value.birthday = data.value.birthday;
   state.value.name = data.value.name;
   state.value.phone = data.value.phone;
+  state.value.gender = data.value.gender;
 });
 </script>
 
