@@ -32,10 +32,10 @@ export default NuxtAuthHandler({
           });
         }
 
-        const { email, _id } = user.toObject();
         return {
-          email,
-          _id,
+          _id: user._id,
+          id: user.id,
+          email: user.email,
         };
       },
     }),

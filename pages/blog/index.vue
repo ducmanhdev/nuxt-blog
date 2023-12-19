@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 const page = ref(1);
-const { data } = await useLazyFetch('/api/posts', {
+const { data } = await useFetch('/api/posts', {
   query: {
     page,
     limit: 2,

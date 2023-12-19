@@ -19,22 +19,6 @@ export interface IPost {
   votes: IVote[];
 }
 
-const BookmarkedBySchema = new Schema({
-  type: Schema.Types.ObjectId,
-});
-
-const VoteSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: [true, 'Vote must belong to a user'],
-  },
-  value: {
-    type: Number,
-    enum: [-1, 1],
-    required: [true, 'Vote must have a value'],
-  },
-});
-
 const PostSchema = new Schema(
   {
     slug: {
@@ -62,8 +46,24 @@ const PostSchema = new Schema(
       ref: 'User',
       required: [true, 'Post must belong to a user'],
     },
-    bookmarkBy: [BookmarkedBySchema],
-    votes: [VoteSchema],
+    bookmarkBy: [
+      {
+        type: Schema.Types.ObjectId,
+      },
+    ],
+    votes: [
+      {
+        userId: {
+          type: Schema.Types.ObjectId,
+          required: [true, 'Vote must belong to a user'],
+        },
+        value: {
+          type: Number,
+          enum: [-1, 1],
+          required: [true, 'Vote must have a value'],
+        },
+      },
+    ],
   },
   {
     timestamps: true, // adds createdAt and updatedAt fields

@@ -49,7 +49,6 @@ const DEFAULT_PER_PAGE = 10;
 const perPage = ref(DEFAULT_PER_PAGE);
 const {
   data: comments,
-  pending,
   refresh: refreshComments,
   error: getCommentsError,
 } = await useLazyFetch('/api/comments', {

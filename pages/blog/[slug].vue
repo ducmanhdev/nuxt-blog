@@ -35,5 +35,4 @@ if (!data.value) {
     statusMessage: 'Post not found',
   });
 }
-console.log(data.value);
 </script>
