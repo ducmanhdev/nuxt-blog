@@ -11,7 +11,7 @@
       <div class="mb-2">
         <div class="flex items-center gap-1">
           <UIcon name="i-mdi-calendar" />
-          {{ createdAt }}
+          {{ dayjs(createdAt).format(DATE_TIME_FORMAT) }}
         </div>
         <div class="flex items-center gap-1 flex-wrap">
           <UIcon name="i-mdi-tag" />
@@ -33,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from 'dayjs';
+
 interface Props {
   slug: string;
   title: string;
