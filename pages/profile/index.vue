@@ -30,6 +30,11 @@ const links = [
     to: '/profile/password',
   },
   {
+    label: 'Created post',
+    icon: 'i-mdi-book-open-page-variant',
+    to: '/profile/created-posts',
+  },
+  {
     label: 'Bookmarks',
     icon: 'i-mdi-bookmark',
     to: '/profile/bookmarks',
