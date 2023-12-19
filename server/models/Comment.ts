@@ -16,18 +16,6 @@ interface IComment {
   isReply: boolean;
 }
 
-const VoteSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: [true, 'Vote must belong to a user'],
-  },
-  value: {
-    type: Number,
-    enum: [-1, 1],
-    required: [true, 'Vote must have a value'],
-  },
-});
-
 const CommentSchema = new Schema(
   {
     content: {
@@ -53,7 +41,19 @@ const CommentSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    votes: [VoteSchema],
+    votes: [
+      {
+        userId: {
+          type: Schema.Types.ObjectId,
+          required: [true, 'Vote must belong to a user'],
+        },
+        value: {
+          type: Number,
+          enum: [-1, 1],
+          required: [true, 'Vote must have a value'],
+        },
+      },
+    ],
   },
   {
     timestamps: true,
