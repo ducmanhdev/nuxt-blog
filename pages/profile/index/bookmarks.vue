@@ -13,7 +13,7 @@
           :summary="post.summary"
           :thumbnail="post.thumbnail"
           :thumbnail-alt="post.title"
-          :tags="post.tags"
+          :categories="post.categories"
         />
       </div>
       <div class="flex justify-center mt-4">

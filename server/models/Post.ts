@@ -11,7 +11,7 @@ export interface IPost {
   content: string;
   thumbnail: string;
   summary: string;
-  tags: string[];
+  categories: string[];
   author: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
@@ -38,7 +38,7 @@ const PostSchema = new Schema(
     summary: {
       type: String,
     },
-    tags: {
+    categories: {
       type: [String],
     },
     author: {

@@ -19,7 +19,7 @@ const initialState = {
   title: '',
   summary: '',
   content: '',
-  tags: ['nuxt', 'nuxt-content'],
+  categories: ['nuxt', 'nuxt-content'],
   thumbnail: 'https://blog.nurriyad.xyz/_vercel/image?url=/blogs-img/blog4.webp&w=320&q=100',
 };
 const state = ref({ ...initialState });

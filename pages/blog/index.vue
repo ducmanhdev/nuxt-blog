@@ -12,7 +12,7 @@
               :summary="post.summary"
               :thumbnail="post.thumbnail"
               :thumbnail-alt="post.title"
-              :tags="post.tags"
+              :categories="post.categories"
             />
           </template>
           <div class="flex justify-center">
@@ -34,7 +34,7 @@ const { data } = await useFetch('/api/posts', {
   query: {
     page,
     limit: 2,
-    tags: currentCategory,
+    categories: currentCategory,
   },
   watch: [page, currentCategory],
 });

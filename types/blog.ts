@@ -5,7 +5,7 @@ export interface Post {
   description: string;
   image: string;
   alt: string;
-  tags: string[];
+  categories: string[];
   ogImage?: string;
   published?: boolean;
 }

@@ -14,7 +14,7 @@
       </div>
       <div class="flex items-center gap-1 flex-wrap">
         <UIcon name="i-mdi-tag" />
-        <UBadge v-for="tag in tags" :key="tag" :label="tag" color="gray" variant="solid" />
+        <UBadge v-for="category in categories" :key="category" :label="category" color="gray" variant="solid" />
       </div>
     </div>
   </article>
@@ -29,7 +29,7 @@ interface Props {
   summary: string;
   thumbnail: string;
   thumbnailAlt: string;
-  tags: string[];
+  categories: string[];
 }
 
 withDefaults(defineProps<Props>(), {
@@ -38,6 +38,6 @@ withDefaults(defineProps<Props>(), {
   summary: 'no summary',
   thumbnail: '',
   thumbnailAlt: 'no-alt',
-  tags: () => [],
+  categories: () => [],
 });
 </script>

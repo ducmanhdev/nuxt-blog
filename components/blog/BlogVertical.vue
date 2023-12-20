@@ -15,8 +15,8 @@
         </div>
         <div class="flex items-center gap-1 flex-wrap">
           <UIcon name="i-mdi-tag" />
-          <template v-for="tag in tags" :key="tag">
-            <span>{{ tag }}</span>
+          <template v-for="category in categories" :key="category">
+            <span>{{ category }}</span>
           </template>
         </div>
       </div>
@@ -42,7 +42,7 @@ interface Props {
   summary: string;
   thumbnail: string;
   thumbnailAlt: string;
-  tags: string[];
+  categories: string[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -52,7 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
   summary: 'no summary',
   thumbnail: '',
   thumbnailAlt: 'no-alt',
-  tags: () => [],
+  categories: () => [],
 });
 
 const path = computed(() => `/blog/${props.slug}`);

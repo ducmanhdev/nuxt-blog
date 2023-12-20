@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     content: body?.content,
     thumbnail: body?.thumbnail,
     summary: body?.summary,
-    tags: body?.tags,
+    categories: body?.categories,
     author: user._id,
   });
 });

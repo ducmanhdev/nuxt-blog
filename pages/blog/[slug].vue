@@ -12,7 +12,7 @@
             :summary="data?.summary"
             :thumbnail="data?.thumbnail"
             :thumbnail-alt="data?.title"
-            :tags="data?.tags"
+            :categories="data?.categories"
           />
           <article class="content" v-html="data?.content"></article>
         </div>

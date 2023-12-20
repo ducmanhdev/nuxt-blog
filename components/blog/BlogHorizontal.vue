@@ -9,7 +9,7 @@
     </NuxtLink>
     <div class="p-5">
       <h4 class="text-xl font-semibold group-hover:text-primary mb-1">
-        <NuxtLink :to="to">{{ title }}</NuxtLink>
+        <NuxtLink :to="path">{{ title }}</NuxtLink>
       </h4>
       <p class="text-ellipsis line-clamp-2 text-base mb-3">{{ summary }}</p>
       <div class="flex items-center flex-wrap gap-y-2 gap-x-4 mb-3">
@@ -19,12 +19,12 @@
         </div>
         <div class="flex items-center gap-1 flex-wrap">
           <UIcon name="i-mdi-tag" />
-          <template v-for="tag in tags" :key="tag">
-            <span>{{ tag }}</span>
+          <template v-for="category in categories" :key="category">
+            <span>{{ category }}</span>
           </template>
         </div>
       </div>
-      <NuxtLink :to="to" class="inline-flex items-center gap-1 text-primary group-hover:underline">
+      <NuxtLink :to="path" class="inline-flex items-center gap-1 text-primary group-hover:underline">
         <p>Read More</p>
         <UIcon name="i-mdi-arrow-right" />
       </NuxtLink>
@@ -38,15 +38,24 @@ import dayjs from 'dayjs';
 interface Props {
   slug: string;
   title: string;
-  summary: string;
   createdAt: string;
+  summary: string;
   thumbnail: string;
   thumbnailAlt: string;
-  tags: Array<string>;
+  categories: string[];
 }
 
-const props = defineProps<Props>();
-const to = computed(() => `/blog/${props.slug}`);
+const props = withDefaults(defineProps<Props>(), {
+  slug: '/',
+  title: 'no title',
+  createdAt: 'no date',
+  summary: 'no summary',
+  thumbnail: '',
+  thumbnailAlt: 'no-alt',
+  categories: () => [],
+});
+
+const path = computed(() => `/blog/${props.slug}`);
 </script>
 
 <style scoped></style>

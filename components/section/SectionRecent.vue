@@ -12,7 +12,7 @@
               :summary="post.summary"
               :thumbnail="post.thumbnail"
               :thumbnail-alt="post.title"
-              :tags="post.tags"
+              :categories="post.categories"
             />
           </template>
         </template>
