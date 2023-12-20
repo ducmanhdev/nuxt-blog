@@ -17,7 +17,9 @@
           <article class="content" v-html="data?.content"></article>
         </div>
       </div>
-      <Comment :post-id="data.id" />
+      <ClientOnly fallback-tag="div" fallback="Loading comments...">
+        <Comment :post-id="data.id" />
+      </ClientOnly>
     </div>
   </div>
 </template>
