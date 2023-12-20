@@ -37,7 +37,7 @@
 const toast = useToast();
 
 interface Props {
-  post: any;
+  postId: any;
 }
 
 const props = defineProps<Props>();
@@ -48,9 +48,9 @@ const {
   refresh: refreshBookmarkStatus,
 } = await useLazyFetch('/api/bookmark-status', {
   query: {
-    postId: props.post.id,
+    postId: props.postId,
   },
-  watch: [() => props.post.id],
+  watch: [() => props.postId],
 });
 
 const isBookmarkLoading = ref(false);
@@ -60,7 +60,7 @@ const handleToggleBookmark = async () => {
     await $fetch('/api/bookmark', {
       method: 'POST',
       body: {
-        postId: props.post.id,
+        postId: props.postId,
       },
     });
     refreshBookmarkStatus();
@@ -76,9 +76,9 @@ const handleToggleBookmark = async () => {
 
 const { data: voteInfo, refresh: refreshVoteInfo } = useLazyFetch('/api/vote-post-info', {
   query: {
-    postId: props.post.id,
+    postId: props.postId,
   },
-  watch: [() => props.post.id],
+  watch: [() => props.postId],
 });
 
 const isVoteLoadingValue = ref<false | 1 | -1>(false);
@@ -88,7 +88,7 @@ const handleVote = async (value: 1 | -1) => {
     await $fetch('/api/vote-post', {
       method: 'POST',
       body: {
-        postId: props.post.id,
+        postId: props.postId,
         value,
       },
     });

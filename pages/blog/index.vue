@@ -1,7 +1,7 @@
 <template>
   <div class="py-10">
     <div class="container">
-      <h1 class="section-title">Blog</h1>
+      <h1 class="section-title">{{ title }}</h1>
       <div class="space-y-4">
         <template v-if="data?.data?.length">
           <template v-for="post in data?.data" :key="post.title">
@@ -26,13 +26,17 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute();
 const page = ref(1);
+const currentCategory = computed(() => route.query.category);
+const title = computed(() => (route.query.category ? `#${route.query.category}` : 'Blog'));
 const { data } = await useFetch('/api/posts', {
   query: {
     page,
     limit: 2,
+    tags: currentCategory,
   },
-  watch: [page],
+  watch: [page, currentCategory],
 });
 </script>
 

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="lg:grid lg:grid-cols-[100px_1fr_100px] lg:gap-10 mb-6">
         <aside>
-          <BlogNavigation :post="data" />
+          <BlogNavigation :post-id="data.id" />
         </aside>
         <div v-if="data">
           <BlogHero
