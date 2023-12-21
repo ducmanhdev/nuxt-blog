@@ -1,6 +1,6 @@
 <template>
   <article class="group border overflow-hidden rounded-2xl shadow-sm sm:grid grid-cols-[300px_1fr] items-center">
-    <NuxtLink :to="to" class="block self-stretch overflow-hidden">
+    <NuxtLink :to="path" class="block self-stretch overflow-hidden">
       <NuxtImg
         class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-all duration-500"
         :src="thumbnail"
