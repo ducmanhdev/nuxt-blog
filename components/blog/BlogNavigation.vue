@@ -3,14 +3,14 @@
     <div class="flex flex-col items-center gap-2 text-center">
       <UButton
         icon="i-mdi-chevron-up"
-        :color="voteInfo?.voteValue === 1 ? 'primary' : 'gray'"
+        :color="voteInfo?.userVoteValue === 1 ? 'primary' : 'gray'"
         :loading="isVoteLoadingValue === 1"
         @click="handleVote(1)"
       />
-      <p class="font-semibold text-xl">{{ voteInfo?.voteCount }}</p>
+      <p class="font-semibold text-xl">{{ voteInfo?.totalValue }}</p>
       <UButton
         icon="i-mdi-chevron-down"
-        :color="voteInfo?.voteValue === -1 ? 'primary' : 'gray'"
+        :color="voteInfo?.userVoteValue === -1 ? 'primary' : 'gray'"
         :loading="isVoteLoadingValue === -1"
         @click="handleVote(-1)"
       />
@@ -74,7 +74,7 @@ const handleToggleBookmark = async () => {
   }
 };
 
-const { data: voteInfo, refresh: refreshVoteInfo } = useLazyFetch('/api/vote-post-info', {
+const { data: voteInfo, refresh: refreshVoteInfo } = useLazyFetch('/api/get-post-votes-statistical', {
   query: {
     postId: props.postId,
   },

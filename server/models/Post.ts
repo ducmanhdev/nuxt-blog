@@ -1,11 +1,6 @@
 import { Schema, model, Query, type Types } from 'mongoose';
 import { slugify } from '~/utils';
 
-interface IVote {
-  userId: Types.ObjectId;
-  value: 1 | -1;
-}
-
 export interface IPost {
   title: string;
   content: string;
@@ -16,7 +11,6 @@ export interface IPost {
   createdAt: Date;
   updatedAt: Date;
   bookmarkBy: Types.ObjectId[];
-  votes: IVote[];
 }
 
 const PostSchema = new Schema(
@@ -49,19 +43,6 @@ const PostSchema = new Schema(
     bookmarkBy: [
       {
         type: Schema.Types.ObjectId,
-      },
-    ],
-    votes: [
-      {
-        userId: {
-          type: Schema.Types.ObjectId,
-          required: [true, 'Vote must belong to a user'],
-        },
-        value: {
-          type: Number,
-          enum: [-1, 1],
-          required: [true, 'Vote must have a value'],
-        },
       },
     ],
   },

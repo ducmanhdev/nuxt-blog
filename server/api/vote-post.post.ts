@@ -1,5 +1,6 @@
 import Post from '~/server/models/Post';
 import { validateUser } from '~/server/helpers';
+import PostVote from '~/server/models/PostVote';
 
 export default defineEventHandler(async (event) => {
   const user = await validateUser(event);
@@ -12,7 +13,9 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const post = await Post.findById(postId);
+  const post = await Post.exists({
+    _id: postId,
+  });
   if (!post) {
     throw createError({
       statusMessage: 'Post not found.',
@@ -20,16 +23,21 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const existingVote = post.votes.find((vote: any) => String(vote.userId) === String(user._id));
-  if (existingVote) {
-    if (existingVote.value === value) {
-      post.votes = post.votes.filter((vote: any) => String(vote.userId) !== String(user._id));
-    } else {
-      existingVote.value = value;
-    }
-  } else {
-    post.votes.push({ userId: user._id, value });
+  const existingVote = await PostVote.findOne({
+    userId: user._id,
+    postId: postId,
+  });
+  if (!existingVote) {
+    const newVote = new PostVote({
+      userId: user._id,
+      postId,
+      value,
+    });
+    return newVote.save();
   }
-
-  return post.save();
+  if (existingVote.value === value) {
+    return existingVote.deleteOne();
+  }
+  existingVote.value = value;
+  return existingVote.save();
 });
