@@ -49,7 +49,7 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async () => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/profile', {
+    await $fetch('/api/profile/update', {
       method: 'PATCH',
       body: JSON.stringify(state.value),
     });
@@ -67,7 +67,7 @@ const handleSubmit = async () => {
   }
 };
 
-const { data } = await useFetch('/api/profile');
+const { data } = await useFetch('/api/profile/info');
 watchEffect(() => {
   if (!data.value) return;
   state.value.email = data.value.email;

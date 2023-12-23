@@ -30,7 +30,7 @@ const links = [
     to: '/profile/password',
   },
   {
-    label: 'Created post',
+    label: 'Created posts',
     icon: 'i-mdi-book-open-page-variant',
     to: '/profile/created-posts',
   },

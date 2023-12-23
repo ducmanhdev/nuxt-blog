@@ -9,7 +9,7 @@ export const validateUser = async (event: H3Event<EventHandlerRequest>) => {
   if (!userId) {
     throw createError({ statusMessage: 'Unauthenticated', statusCode: 403 });
   }
-  const user = await User.findById(userId).lean();
+  const user = await User.findById(userId);
   if (!user) {
     throw createError({ statusMessage: 'Unauthenticated', statusCode: 403 });
   }

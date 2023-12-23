@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 const page = ref(1);
-const { data, error } = await useFetch('/api/created-posts', {
+const { data, error } = await useFetch('/api/profile/posts', {
   query: {
     page,
   },

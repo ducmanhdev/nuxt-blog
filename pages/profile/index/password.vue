@@ -27,7 +27,7 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async () => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/profile', {
+    await $fetch('/api/profile/update', {
       method: 'PATCH',
       body: JSON.stringify(state.value),
     });
