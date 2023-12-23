@@ -46,7 +46,7 @@ const {
   data: isBookmark,
   pending: getBookmarkStatusPending,
   refresh: refreshBookmarkStatus,
-} = await useLazyFetch('/api/bookmark-status', {
+} = await useLazyFetch('/api/post/is-bookmarked', {
   query: {
     postId: props.postId,
   },
@@ -74,7 +74,7 @@ const handleToggleBookmark = async () => {
   }
 };
 
-const { data: voteInfo, refresh: refreshVoteInfo } = useLazyFetch('/api/get-post-votes-statistical', {
+const { data: voteInfo, refresh: refreshVoteInfo } = useLazyFetch('/api/post/get-votes-statistical', {
   query: {
     postId: props.postId,
   },

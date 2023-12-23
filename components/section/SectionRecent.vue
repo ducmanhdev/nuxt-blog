@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useFetch('/api/post/all', {
+const { data } = await useFetch('/api/posts', {
   query: {
     limit: 3,
   },

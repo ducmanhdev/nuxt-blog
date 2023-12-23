@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 const route = useRoute();
-const { data } = await useFetch('/api/post/read', {
+const { data } = await useFetch('/api/post', {
   query: {
     slug: route.params.slug,
   },
