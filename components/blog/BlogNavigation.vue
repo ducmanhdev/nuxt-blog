@@ -7,7 +7,7 @@
         :loading="isVoteLoadingValue === 1"
         @click="handleVote(1)"
       />
-      <p class="font-semibold text-xl">{{ voteInfo?.totalValue }}</p>
+      <p class="font-semibold text-xl">{{ voteInfo?.totalValue || 0 }}</p>
       <UButton
         icon="i-mdi-chevron-down"
         :color="voteInfo?.userVoteValue === -1 ? 'primary' : 'gray'"
@@ -57,7 +57,7 @@ const isBookmarkLoading = ref(false);
 const handleToggleBookmark = async () => {
   try {
     isBookmarkLoading.value = true;
-    await $fetch('/api/bookmark', {
+    await $fetch('/api/post/bookmark', {
       method: 'POST',
       body: {
         postId: props.postId,
@@ -85,7 +85,7 @@ const isVoteLoadingValue = ref<false | 1 | -1>(false);
 const handleVote = async (value: 1 | -1) => {
   try {
     isVoteLoadingValue.value = value;
-    await $fetch('/api/vote-post', {
+    await $fetch('/api/post/vote', {
       method: 'POST',
       body: {
         postId: props.postId,

@@ -3,10 +3,12 @@ import APIFeatures from '~/utils/api-features';
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  const features = new APIFeatures(Comment.find(), {
-    ...query,
-    isReply: false,
-  })
+  const features = new APIFeatures(
+    Comment.find({
+      isReply: false,
+    }),
+    query,
+  )
     .filter()
     .sort()
     .limitFields()

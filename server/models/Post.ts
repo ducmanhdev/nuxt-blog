@@ -10,7 +10,6 @@ export interface IPost {
   author: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-  bookmarkBy: Types.ObjectId[];
 }
 
 const PostSchema = new Schema(
@@ -40,11 +39,6 @@ const PostSchema = new Schema(
       ref: 'User',
       required: [true, 'Post must belong to a user'],
     },
-    bookmarkBy: [
-      {
-        type: Schema.Types.ObjectId,
-      },
-    ],
   },
   {
     timestamps: true, // adds createdAt and updatedAt fields

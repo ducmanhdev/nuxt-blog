@@ -29,8 +29,8 @@ const page = ref(1);
 const { data, error } = await useFetch('/api/bookmarks', {
   query: {
     page,
+    limit: 2,
   },
-  server: false,
   watch: [page],
 });
 </script>

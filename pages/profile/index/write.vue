@@ -28,7 +28,7 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async () => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/post', {
+    await $fetch('/api/post/create', {
       method: 'POST',
       body: JSON.stringify(state.value),
     });

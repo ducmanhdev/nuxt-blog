@@ -30,7 +30,7 @@ const route = useRoute();
 const page = ref(1);
 const currentCategory = computed(() => route.query.category);
 const title = computed(() => (route.query.category ? `#${route.query.category}` : 'Blog'));
-const { data } = await useFetch('/api/posts', {
+const { data } = await useFetch('/api/post/all', {
   query: {
     page,
     limit: 2,

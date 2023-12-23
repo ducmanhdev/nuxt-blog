@@ -1,8 +1,8 @@
-import PostVote from '~/server/models/PostVote';
+import Vote from '~/server/models/Vote';
 import { validateUser } from '~/server/helpers';
 
 export default defineEventHandler(async (event) => {
-  const user = await validateUser(event, false);
+  const user = await validateUser(event).catch(/* empty */);
   const { postId } = getQuery(event);
 
   if (!postId) {
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
     });
   }
-  const results = await PostVote.find({
+  const results = await Vote.find({
     postId,
   });
   const totalValue = results.reduce((sum, current) => sum + current.value, 0);

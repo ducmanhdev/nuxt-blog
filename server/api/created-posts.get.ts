@@ -6,10 +6,12 @@ export default defineEventHandler(async (event) => {
   const user = await validateUser(event);
   const query = getQuery(event);
 
-  const features = new APIFeatures(Post.find(), {
-    ...query,
-    author: user._id,
-  })
+  const features = new APIFeatures(
+    Post.find({
+      author: user._id,
+    }),
+    query,
+  )
     .filter()
     .sort()
     .limitFields()

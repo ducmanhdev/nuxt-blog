@@ -1,6 +1,6 @@
 import Post from '~/server/models/Post';
 import { validateUser } from '~/server/helpers';
-import PostVote from '~/server/models/PostVote';
+import Vote from '~/server/models/Vote';
 
 export default defineEventHandler(async (event) => {
   const user = await validateUser(event);
@@ -23,12 +23,12 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const existingVote = await PostVote.findOne({
+  const existingVote = await Vote.findOne({
     userId: user._id,
     postId: postId,
   });
   if (!existingVote) {
-    const newVote = new PostVote({
+    const newVote = new Vote({
       userId: user._id,
       postId,
       value,

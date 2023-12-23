@@ -1,5 +1,5 @@
 import { validateUser } from '~/server/helpers';
-import Post from '~/server/models/Post';
+import Bookmark from '~/server/models/Bookmark';
 
 export default defineEventHandler(async (event) => {
   const user = await validateUser(event);
@@ -9,11 +9,9 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusMessage: 'Missing post id', statusCode: 400 });
   }
 
-  const isBookmark = await Post.exists({
-    _id: query.postId,
-    bookmarkBy: {
-      $in: [user._id],
-    },
+  const isBookmark = await Bookmark.exists({
+    userId: user._id,
+    postId: query.postId,
   });
   return Boolean(isBookmark);
 });

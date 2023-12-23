@@ -1,6 +1,7 @@
 export default class APIFeatures {
   query: any;
   queryString: any;
+  countQuery: any;
 
   constructor(query: any, queryString: any) {
     this.query = query;
@@ -40,6 +41,7 @@ export default class APIFeatures {
   }
 
   paginate() {
+    this.countQuery = this.query.clone();
     const page = this.queryString.page * 1 || 1;
     const limit = this.queryString.limit * 1 || 10;
     const skip = (page - 1) * limit;
@@ -48,7 +50,7 @@ export default class APIFeatures {
   }
 
   async meta() {
-    const total = await this.query.model.estimatedDocumentCount();
+    const total = await this.countQuery.countDocuments();
     const page = this.queryString.page * 1 || 1;
     const limit = this.queryString.limit * 1 || 10;
     return {
