@@ -1,23 +1,19 @@
 import { Query, Schema, model, type Types } from 'mongoose';
 
-interface IVote {
-  userId: Types.ObjectId;
-  value: 1 | -1;
-}
-
 interface IComment {
+  originalCommentId?: Types.ObjectId;
   content: string;
   postId: Types.ObjectId;
   author: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-  votes: IVote[];
-  replies: Types.ObjectId[];
-  isReply: boolean;
 }
 
 const CommentSchema = new Schema(
   {
+    originalCommentId: {
+      type: Schema.Types.ObjectId,
+    },
     content: {
       type: String,
       required: [true, 'Content can not be empty'],
@@ -31,29 +27,6 @@ const CommentSchema = new Schema(
       ref: 'User',
       required: [true, 'Comment must belong to a user'],
     },
-    replies: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Comment',
-      },
-    ],
-    isReply: {
-      type: Boolean,
-      default: false,
-    },
-    votes: [
-      {
-        userId: {
-          type: Schema.Types.ObjectId,
-          required: [true, 'Vote must belong to a user'],
-        },
-        value: {
-          type: Number,
-          enum: [-1, 1],
-          required: [true, 'Vote must have a value'],
-        },
-      },
-    ],
   },
   {
     timestamps: true,
@@ -66,13 +39,31 @@ const CommentSchema = new Schema(
   },
 );
 
+CommentSchema.virtual('votes', {
+  ref: 'CommentVote', // The model to use
+  localField: '_id', // Find votes where `localField`
+  foreignField: 'commentId', // is equal to `foreignField`
+  justOne: false, // We expect multiple votes, not 1
+});
+
+CommentSchema.virtual('replies', {
+  ref: 'Comment', // The model to use
+  localField: '_id', // Find votes where `localField`
+  foreignField: 'originalCommentId', // is equal to `foreignField`
+  justOne: false, // We expect multiple votes, not 1
+});
+
 CommentSchema.pre(/^find/, function (this: Query<any, any>, next: Function) {
   this.populate({
     path: 'author',
     select: 'name id',
-  }).populate({
-    path: 'replies',
-  });
+  })
+    .populate({
+      path: 'replies',
+    })
+    .populate({
+      path: 'votes',
+    });
   next();
 });
 

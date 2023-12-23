@@ -70,7 +70,7 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/comment', {
+    await $fetch('/api/comment/create', {
       method: 'POST',
       body: {
         content: event.data.content,

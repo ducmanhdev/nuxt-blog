@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   const features = new APIFeatures(
     Comment.find({
-      isReply: false,
+      originalCommentId: { $exists: false },
     }),
     query,
   )

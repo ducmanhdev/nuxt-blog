@@ -1,4 +1,5 @@
 import Comment from '~/server/models/Comment';
+import CommentVote from '~/server/models/CommentVote';
 import { validateUser } from '~/server/helpers';
 
 export default defineEventHandler(async (event) => {
@@ -20,16 +21,21 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const existingVote = comment.votes.find((vote: any) => String(vote.userId) === String(user._id));
-  if (existingVote) {
-    if (existingVote.value === value) {
-      comment.votes = comment.votes.filter((vote: any) => String(vote.userId) !== String(user._id));
-    } else {
-      existingVote.value = value;
-    }
-  } else {
-    comment.votes.push({ userId: user._id, value });
+  const existingVote = await CommentVote.findOne({
+    userId: user._id,
+    commentId: commentId,
+  });
+  if (!existingVote) {
+    const newVote = new CommentVote({
+      userId: user._id,
+      commentId,
+      value,
+    });
+    return newVote.save();
   }
-
-  return comment.save();
+  if (existingVote.value === value) {
+    return existingVote.deleteOne();
+  }
+  existingVote.value = value;
+  return existingVote.save();
 });

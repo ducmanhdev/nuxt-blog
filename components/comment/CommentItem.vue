@@ -17,7 +17,7 @@
           :color="currentVoteState === 1 ? 'primary' : 'gray'"
           @click="handleVote(1)"
         />
-        <p class="font-semibold">{{ voteCount }}</p>
+        <p class="font-semibold min-w-[16px] text-center">{{ voteCount }}</p>
         <UButton
           size="sm"
           icon="i-mdi-chevron-down"
@@ -109,7 +109,7 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/reply-comment', {
+    await $fetch('/api/comment/reply', {
       method: 'POST',
       body: {
         originalCommentId: props.id,
@@ -139,7 +139,7 @@ const isVoteLoadingValue = ref<false | 1 | -1>(false);
 const handleVote = async (value: 1 | -1) => {
   try {
     isVoteLoadingValue.value = value;
-    await $fetch('/api/vote-comment', {
+    await $fetch('/api/comment/vote', {
       method: 'POST',
       body: {
         commentId: props.id,
