@@ -51,7 +51,7 @@ const handleSubmit = async () => {
     isSubmitLoading.value = true;
     await $fetch('/api/profile/update', {
       method: 'PATCH',
-      body: JSON.stringify(state.value),
+      body: state.value,
     });
     toast.add({
       title: 'Update profile successfully',

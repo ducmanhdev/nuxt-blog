@@ -27,6 +27,7 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
 import { z } from 'zod';
+import { REQUIRED_PASSWORD_LENGTH } from '~/constants';
 
 definePageMeta({
   middleware: 'auth',
@@ -47,8 +48,10 @@ const state = ref({
 const schema = z
   .object({
     email: z.string().email('Invalid email'),
-    password: z.string().min(8, 'Must be at least 8 characters'),
-    confirmPassword: z.string().min(8, 'Must be at least 8 characters'),
+    password: z.string().min(REQUIRED_PASSWORD_LENGTH, `Must be at least ${REQUIRED_PASSWORD_LENGTH} characters`),
+    confirmPassword: z
+      .string()
+      .min(REQUIRED_PASSWORD_LENGTH, `Must be at least ${REQUIRED_PASSWORD_LENGTH} characters`),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

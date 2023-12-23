@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { REQUIRED_PASSWORD_LENGTH } from '~/constants';
 
 export interface IUser {
   email: string;
@@ -20,7 +21,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    length: [8, 'Password must be at least 8 characters long'],
+    length: [REQUIRED_PASSWORD_LENGTH, `Password must be at least ${REQUIRED_PASSWORD_LENGTH} characters long`],
   },
   name: {
     type: String,
