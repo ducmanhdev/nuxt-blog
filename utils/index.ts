@@ -26,3 +26,9 @@ export const handleScrollToEl = (querySelector: string) => {
     behavior: 'smooth',
   });
 };
+
+export const objectToFormData = (obj: Record<any, any>) => {
+  const formData = new FormData();
+  Object.keys(obj).forEach((key) => formData.append(key, obj[key]));
+  return formData;
+};

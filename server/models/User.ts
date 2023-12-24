@@ -2,14 +2,19 @@ import { Schema, model } from 'mongoose';
 import { REQUIRED_PASSWORD_LENGTH } from '~/constants';
 
 export interface IUser {
+  avatar: string;
   email: string;
   password: string;
   name: string;
   birthday: string;
   phone: string;
+  gender: 'Male' | 'Female' | 'Other';
 }
 
 const UserSchema = new Schema({
+  avatar: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
