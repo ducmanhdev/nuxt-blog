@@ -2,7 +2,7 @@
   <UForm :state="state" class="space-y-4" @submit="handleSubmit">
     <UFormGroup label="Avatar" name="avatar">
       <label class="inline-block cursor-pointer">
-        <UAvatar :src="state.avatar" size="3xl" alt="Avatar" />
+        <UAvatar :src="avatarPreview" size="3xl" alt="Avatar" />
         <UInput type="file" class="hidden" accept="image/*" @change="handleUploadAvatar" />
       </label>
     </UFormGroup>
@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+const userStore = useUserStore();
 const toast = useToast();
 
 const genderOptions = [
@@ -43,8 +44,9 @@ const genderOptions = [
   },
 ];
 
+const avatarPreview = ref();
 const state = ref({
-  avatar: '',
+  avatar: null as any,
   email: '',
   name: '',
   birthday: '',
@@ -52,12 +54,11 @@ const state = ref({
   gender: '',
 });
 
-const avatarUploadFile = ref();
 const handleUploadAvatar = (event: any) => {
   const imageFile = event.target.files[0];
   if (!imageFile) return;
-  state.value.avatar = URL.createObjectURL(imageFile);
-  avatarUploadFile.value = imageFile;
+  avatarPreview.value = URL.createObjectURL(imageFile);
+  state.value.avatar = imageFile;
 };
 
 const isSubmitLoading = ref(false);
@@ -66,11 +67,9 @@ const handleSubmit = async () => {
     isSubmitLoading.value = true;
     await $fetch('/api/profile/update', {
       method: 'PATCH',
-      body: objectToFormData({
-        ...state.value,
-        avatarUploadFile: avatarUploadFile.value,
-      }),
+      body: objectToFormData(state.value),
     });
+    userStore.refreshUser();
     toast.add({
       title: 'Update profile successfully',
       color: 'green',
@@ -86,10 +85,9 @@ const handleSubmit = async () => {
 };
 
 const { data } = await useFetch('/api/profile/info');
-
 watchEffect(() => {
   if (!data.value) return;
-  state.value.avatar = data.value.avatar;
+  avatarPreview.value = data.value.avatar;
   state.value.email = data.value.email;
   state.value.birthday = data.value.birthday;
   state.value.name = data.value.name;

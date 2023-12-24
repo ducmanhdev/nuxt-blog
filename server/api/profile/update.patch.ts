@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     phone: fieldsSingle.phone,
     gender: fieldsSingle.gender,
   };
-  const avatarUploadFile = files?.avatarUploadFile?.[0]?.filepath;
+  const avatarUploadFile = files?.avatar?.[0]?.filepath;
   if (avatarUploadFile) {
     const { url } = await cloudinary.uploader.upload(avatarUploadFile, {
       upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,

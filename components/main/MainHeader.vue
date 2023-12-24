@@ -8,8 +8,8 @@
             <NuxtLink :to="link.to" active-class="text-primary">{{ link.label }}</NuxtLink>
           </li>
           <li>
-            <UDropdown v-if="data?.user" :items="profileLinks" :popper="{ placement: 'bottom-end' }" class="flex">
-              <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
+            <UDropdown v-if="userInfo" :items="profileLinks" :popper="{ placement: 'bottom-end' }" class="flex">
+              <UAvatar :src="userInfo.avatar" />
             </UDropdown>
             <NuxtLink v-else to="/login">Login</NuxtLink>
           </li>
@@ -33,6 +33,9 @@
 </template>
 
 <script setup lang="ts">
+const userStore = useUserStore();
+const userInfo = computed(() => userStore.user);
+
 const toast = useToast();
 const colorMode = useColorMode();
 
@@ -40,7 +43,7 @@ const toggleColorMode = () => {
   colorMode.value === 'dark' ? (colorMode.preference = 'light') : (colorMode.preference = 'dark');
 };
 
-const { data, signOut } = useAuth();
+const { signOut } = useAuth();
 const handleSignOut = async () => {
   try {
     await signOut({ callbackUrl: '/' });
@@ -58,7 +61,7 @@ const handleSignOut = async () => {
 const profileLinks = computed(() => [
   [
     {
-      label: data.value?.user?.email,
+      label: userInfo.value.email,
       slot: 'account',
       disabled: true,
     },

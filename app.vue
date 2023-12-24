@@ -23,6 +23,13 @@
   </div>
 </template>
 <script setup lang="ts">
+const userStore = useUserStore();
+const { data } = useAuth();
+
+if (data.value) {
+  await useAsyncData('user', () => userStore.fetchUser().then(() => true));
+}
+
 const handleScrollToTop = () => {
   window.scrollTo({
     top: 0,

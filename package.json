@@ -32,6 +32,7 @@
     "@iconify-json/mdi": "^1.1.63",
     "@nuxt/image": "1.1.0",
     "@nuxt/ui": "^2.11.1",
+    "@pinia/nuxt": "^0.5.1",
     "@tiptap/pm": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
     "@tiptap/vue-3": "^2.1.13",

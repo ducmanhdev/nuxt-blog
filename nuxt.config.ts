@@ -27,6 +27,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/ui',
     '@sidebase/nuxt-auth',
+    '@pinia/nuxt',
   ],
   nitro: {
     plugins: ['~/server/plugins/mongodb.ts'],
