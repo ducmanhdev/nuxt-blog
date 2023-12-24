@@ -13,7 +13,7 @@
       <UInput v-model="state.name" />
     </UFormGroup>
     <UFormGroup label="Birthday" name="birthday">
-      <UInput v-model="state.birthday" />
+      <DatePicker v-model="state.birthday" />
     </UFormGroup>
     <UFormGroup label="Phone number" name="phone">
       <UInput v-model="state.phone" />
@@ -26,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from 'dayjs';
+
 const userStore = useUserStore();
 const toast = useToast();
 
@@ -45,11 +47,21 @@ const genderOptions = [
 ];
 
 const avatarPreview = ref();
-const state = ref({
-  avatar: null as any,
+
+type State = {
+  avatar: File | null;
+  email: string;
+  name: string;
+  birthday: Date | null;
+  phone: string;
+  gender: string;
+};
+
+const state = ref<State>({
+  avatar: null,
   email: '',
   name: '',
-  birthday: '',
+  birthday: null,
   phone: '',
   gender: '',
 });
@@ -89,7 +101,7 @@ watchEffect(() => {
   if (!data.value) return;
   avatarPreview.value = data.value.avatar;
   state.value.email = data.value.email;
-  state.value.birthday = data.value.birthday;
+  state.value.birthday = dayjs(data.value.birthday).toDate();
   state.value.name = data.value.name;
   state.value.phone = data.value.phone;
   state.value.gender = data.value.gender;

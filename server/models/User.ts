@@ -6,7 +6,7 @@ export interface IUser {
   email: string;
   password: string;
   name: string;
-  birthday: string;
+  birthday: Date;
   phone: string;
   gender: 'Male' | 'Female' | 'Other';
 }
@@ -33,7 +33,7 @@ const UserSchema = new Schema({
     trim: true,
   },
   birthday: {
-    type: String,
+    type: Date,
     trim: true,
   },
   phone: {
