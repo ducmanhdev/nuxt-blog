@@ -1,10 +1,7 @@
 <template>
   <UForm :state="state" class="space-y-4" @submit="handleSubmit">
     <UFormGroup label="Avatar" name="avatar">
-      <label class="inline-block cursor-pointer">
-        <UAvatar :src="avatarPreview" size="3xl" alt="Avatar" />
-        <UInput type="file" class="hidden" accept="image/*" @change="handleUploadAvatar" />
-      </label>
+      <WidgetUploadAvatar v-model="state.avatar" />
     </UFormGroup>
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" disabled />
@@ -46,10 +43,8 @@ const genderOptions = [
   },
 ];
 
-const avatarPreview = ref();
-
 type State = {
-  avatar: File | null;
+  avatar: string;
   email: string;
   name: string;
   birthday: Date | null;
@@ -58,7 +53,7 @@ type State = {
 };
 
 const state = ref<State>({
-  avatar: null,
+  avatar: '',
   email: '',
   name: '',
   birthday: null,
@@ -66,20 +61,13 @@ const state = ref<State>({
   gender: '',
 });
 
-const handleUploadAvatar = (event: any) => {
-  const imageFile = event.target.files[0];
-  if (!imageFile) return;
-  avatarPreview.value = URL.createObjectURL(imageFile);
-  state.value.avatar = imageFile;
-};
-
 const isSubmitLoading = ref(false);
 const handleSubmit = async () => {
   try {
     isSubmitLoading.value = true;
     await $fetch('/api/profile/update', {
       method: 'PATCH',
-      body: objectToFormData(state.value),
+      body: state.value,
     });
     userStore.refreshUser();
     toast.add({
@@ -99,7 +87,7 @@ const handleSubmit = async () => {
 const { data } = await useFetch('/api/profile/info');
 watchEffect(() => {
   if (!data.value) return;
-  avatarPreview.value = data.value.avatar;
+  state.value.avatar = data.value.avatar;
   state.value.email = data.value.email;
   state.value.birthday = dayjs(data.value.birthday).toDate();
   state.value.name = data.value.name;

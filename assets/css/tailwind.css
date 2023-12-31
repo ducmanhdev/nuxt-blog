@@ -28,6 +28,10 @@
         @apply text-4xl font-semibold mb-4;
     }
 
+    .base-input {
+        @apply relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-3 py-2 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
+    }
+
     .content {
         @apply prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-base md:prose-lg prose-h1:no-underline prose-zinc dark:prose-invert prose-img:rounded-lg;
     }
