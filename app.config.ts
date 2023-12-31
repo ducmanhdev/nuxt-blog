@@ -13,6 +13,16 @@ export default defineAppConfig({
         size: 'md',
       },
     },
+    select: {
+      default: {
+        size: 'md',
+      },
+    },
+    badge: {
+      default: {
+        size: 'md',
+      },
+    },
     pagination: {
       wrapper: 'items-stretch',
     },

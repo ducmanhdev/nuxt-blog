@@ -21,7 +21,7 @@
     <UFormGroup label="Gender" name="gender">
       <URadioGroup v-model="state.gender" :options="genderOptions" />
     </UFormGroup>
-    <UButton type="submit" :loading="isSubmitLoading">Submit</UButton>
+    <UButton type="submit" :loading="isSubmitLoading" block>Submit</UButton>
   </UForm>
 </template>
 

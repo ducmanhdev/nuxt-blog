@@ -23,7 +23,7 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "nuxt": "^3.8.2",
+    "nuxt": "^3.9.0",
     "prettier": "^3.1.1"
   },
   "dependencies": {
@@ -33,16 +33,15 @@
     "@nuxt/image": "1.1.0",
     "@nuxt/ui": "^2.11.1",
     "@pinia/nuxt": "^0.5.1",
-    "@tiptap/pm": "^2.1.13",
-    "@tiptap/starter-kit": "^2.1.13",
-    "@tiptap/vue-3": "^2.1.13",
+    "@tinymce/tinymce-vue": "^5.1.1",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.1",
     "dayjs": "^1.11.10",
     "h3-formidable": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
-    "next-auth": "^4.22.5",
+    "next-auth": "4.22.5",
+    "tinymce": "^6.8.2",
     "v-calendar": "^3.1.2",
     "zod": "^3.22.4"
   }

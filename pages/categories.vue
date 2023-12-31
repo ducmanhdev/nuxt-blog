@@ -4,30 +4,13 @@
     <div class="pb-10">
       <div class="container">
         <div class="flex flex-wrap gap-4">
-          <CategoryBadge v-for="topic in topics" :key="topic" :title="topic" />
+          <CategoryBadge v-for="category in BLOG_CATEGORIES" :key="category" :title="category" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-const topics = [
-  'javascript',
-  'typescript',
-  'git',
-  'docker',
-  'kubernetes',
-  'vue',
-  'nuxt',
-  'pinia',
-  'vuex',
-  'firebase',
-  'supabase',
-  'cypress',
-  'vercel',
-  'namecheap',
-];
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

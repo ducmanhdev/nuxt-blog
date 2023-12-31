@@ -10,7 +10,7 @@
       <UFormGroup label="Confirm new password" name="confirmNewPassword">
         <UInput v-model="state.confirmNewPassword" type="password" />
       </UFormGroup>
-      <UButton type="submit" :loading="isSubmitLoading">Submit</UButton>
+      <UButton type="submit" :loading="isSubmitLoading" block>Submit</UButton>
     </UForm>
   </div>
 </template>

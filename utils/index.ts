@@ -32,3 +32,10 @@ export const objectToFormData = (obj: Record<any, any>) => {
   Object.keys(obj).forEach((key) => formData.append(key, obj[key]));
   return formData;
 };
+
+export const checkImageFileSize = (imageFile: File, maxSizeMB: number = 0.5) => {
+  const maxSizeBytes = maxSizeMB * 1024 * 1024; // Convert size limit to bytes
+  if (imageFile.size > maxSizeBytes) {
+    throw new Error(`The file size exceeds the limit of ${maxSizeMB}MB.`);
+  }
+};

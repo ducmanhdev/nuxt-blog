@@ -4,6 +4,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
     mongodbUri: process.env.MONGODB_URI,
+    cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    cloudinaryUploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
+    cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+    cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRRET,
+    public: {
+      tinymceApiKey: process.env.TINYMCE_API_KEY,
+    },
   },
   app: {
     head: {

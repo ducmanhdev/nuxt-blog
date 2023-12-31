@@ -29,7 +29,11 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useFetch('/api/posts/top-10-trending');
+const { data } = await useFetch('/api/posts/top-10-trending', {
+  query: {
+    limit: 3,
+  },
+});
 </script>
 
 <style scoped></style>
