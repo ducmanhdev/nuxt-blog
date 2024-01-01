@@ -96,7 +96,7 @@ const handleVote = async (value: 1 | -1) => {
   } catch (error: any) {
     toast.add({
       title: error.message,
-      color: 'error',
+      color: 'red',
     });
   } finally {
     isVoteLoadingValue.value = false;

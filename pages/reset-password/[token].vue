@@ -1,28 +1,16 @@
 <template>
   <div class="py-10">
     <div class="container">
-      <h1 class="section-title text-center">Register</h1>
+      <h1 class="section-title text-center">Forget password</h1>
       <UForm :schema="schema" :state="state" class="space-y-4 max-w-md mx-auto" @submit="handleSubmit">
-        <UFormGroup label="Email" name="email">
-          <UInput v-model="state.email" />
-        </UFormGroup>
         <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
+          <UInput v-model="state.password" />
         </UFormGroup>
-        <UFormGroup label="Password confirm" name="passwordConfirm">
-          <UInput v-model="state.passwordConfirm" type="password" />
+        <UFormGroup label="Password Confirm" name="passwordConfirm">
+          <UInput v-model="state.passwordConfirm" />
         </UFormGroup>
         <div class="text-center">
-          <UButton type="submit" block :loading="isSubmitLoading">Register</UButton>
-        </div>
-        <div class="flex justify-between gap-4">
-          <p>
-            Have an account?
-            <NuxtLink to="/login" class="text-primary">Login</NuxtLink>
-          </p>
-          <p>
-            <NuxtLink to="/forget-password" class="text-primary">Forget password?</NuxtLink>
-          </p>
+          <UButton type="submit" block :loading="isSubmitLoading">Send email</UButton>
         </div>
       </UForm>
     </div>
@@ -43,16 +31,15 @@ definePageMeta({
 });
 
 const toast = useToast();
+const route = useRoute();
 
 const state = ref({
-  email: '',
   password: '',
   passwordConfirm: '',
 });
 
 const schema = z
   .object({
-    email: z.string().email('Invalid email'),
     password: z.string().min(REQUIRED_PASSWORD_LENGTH, `Must be at least ${REQUIRED_PASSWORD_LENGTH} characters`),
     passwordConfirm: z
       .string()
@@ -69,16 +56,15 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/auth/register', {
-      method: 'POST',
+    await $fetch(`/api/auth/reset-password/${route.params.token}`, {
+      method: 'PATCH',
       body: {
-        email: event.data.email,
         password: event.data.password,
         passwordConfirm: event.data.passwordConfirm,
       },
     });
     toast.add({
-      title: 'Registered successfully',
+      title: 'Reset password successfully',
       color: 'green',
     });
     navigateTo('/login');

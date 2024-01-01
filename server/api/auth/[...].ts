@@ -1,8 +1,6 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcrypt';
 import { NuxtAuthHandler } from '#auth';
 import User from '~/server/models/User';
-import { Schema } from 'mongoose';
 
 export default NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,
@@ -17,21 +15,14 @@ export default NuxtAuthHandler({
       async authorize(credentials: { email: string; password: string }) {
         const user = await User.findOne({
           email: credentials.email,
-        });
-        if (!user) {
+        }).select('password');
+        const isPasswordCorrect = await user?.checkPassword(credentials.password);
+        if (!user || !isPasswordCorrect) {
           throw createError({
             statusCode: 401,
             statusMessage: 'Invalid credentials',
           });
         }
-        const isValid = await bcrypt.compare(credentials.password, user.password);
-        if (!isValid) {
-          throw createError({
-            statusCode: 401,
-            statusMessage: 'Invalid credentials',
-          });
-        }
-
         return {
           _id: user._id,
           id: user.id,

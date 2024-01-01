@@ -24,7 +24,7 @@ export default defineAppConfig({
       },
     },
     avatar: {
-      background: 'bg-white dark:bg-gray-900',
+      // background: 'bg-white dark:bg-gray-900',
       size: {
         '4xl': 'w-[140px] h-[140px] text-4xl',
       },

@@ -82,6 +82,7 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   } catch (error: any) {
     toast.add({
       title: error.message,
+      color: 'red',
     });
   } finally {
     isSubmitLoading.value = false;
@@ -97,6 +98,7 @@ const handleLoadMoreComment = async () => {
   } catch (error: any) {
     toast.add({
       title: error.message,
+      color: 'red',
     });
   } finally {
     isLoadMoreLoading.value = false;

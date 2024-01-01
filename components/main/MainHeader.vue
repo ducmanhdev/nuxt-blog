@@ -9,7 +9,7 @@
           </li>
           <li>
             <UDropdown v-if="userInfo" :items="profileLinks" :popper="{ placement: 'bottom-end' }" class="flex">
-              <UAvatar :src="userInfo.avatar" />
+              <UAvatar :src="userInfo.avatar" icon="i-mdi-account" />
             </UDropdown>
             <NuxtLink v-else to="/login">Login</NuxtLink>
           </li>

@@ -1,25 +1,13 @@
 <template>
   <div class="py-10">
     <div class="container">
-      <h1 class="section-title text-center">Login</h1>
+      <h1 class="section-title text-center">Forget password</h1>
       <UForm :schema="schema" :state="state" class="space-y-4 max-w-md mx-auto" @submit="handleSubmit">
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" />
         </UFormGroup>
-        <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
-        </UFormGroup>
         <div class="text-center">
-          <UButton type="submit" block :loading="isSubmitLoading">Login</UButton>
-        </div>
-        <div class="flex justify-between gap-4">
-          <p>
-            Don't have an account?
-            <NuxtLink to="/register" class="text-primary">Register</NuxtLink>
-          </p>
-          <p>
-            <NuxtLink to="/forget-password" class="text-primary">Forget password?</NuxtLink>
-          </p>
+          <UButton type="submit" block :loading="isSubmitLoading">Send email</UButton>
         </div>
       </UForm>
     </div>
@@ -29,7 +17,6 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
 import { z } from 'zod';
-import { REQUIRED_PASSWORD_LENGTH } from '~/constants';
 
 definePageMeta({
   middleware: 'auth',
@@ -39,17 +26,14 @@ definePageMeta({
   },
 });
 
-const { signIn } = useAuth();
 const toast = useToast();
 
 const state = ref({
-  email: '',
-  password: '',
+  email: undefined,
 });
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
-  password: z.string().min(REQUIRED_PASSWORD_LENGTH, `Must be at least ${REQUIRED_PASSWORD_LENGTH} characters`),
 });
 
 type Schema = z.output<typeof schema>;
@@ -58,10 +42,16 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await signIn('credentials', {
-      email: event.data.email,
-      password: event.data.password,
-      callbackUrl: '/',
+    await $fetch('/api/auth/forget-password', {
+      method: 'POST',
+      body: {
+        email: event.data.email,
+      },
+    });
+    toast.add({
+      title: 'An email has been sent to your provided email address. Please check your inbox.',
+      color: 'green',
+      timeout: 0,
     });
   } catch (error: any) {
     toast.add({

@@ -49,7 +49,7 @@ export default defineNuxtConfig({
     icons: ['mdi', 'ion'],
   },
   auth: {
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL,
     globalAppMiddleware: false,
     provider: {
       type: 'authjs',

@@ -4,7 +4,7 @@
       <UFormGroup label="Old password" name="oldPassword">
         <UInput v-model="state.oldPassword" type="password" />
       </UFormGroup>
-      <UFormGroup label="NewPassword" name="newPassword">
+      <UFormGroup label="New password" name="newPassword">
         <UInput v-model="state.newPassword" type="password" />
       </UFormGroup>
       <UFormGroup label="Confirm new password" name="confirmNewPassword">
@@ -48,7 +48,7 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/profile/update-password', {
+    await $fetch('/api/update-password', {
       method: 'PATCH',
       body: event.data,
     });

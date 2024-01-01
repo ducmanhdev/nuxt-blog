@@ -123,6 +123,7 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   } catch (error: any) {
     toast.add({
       title: error.message,
+      color: 'red'
     });
   } finally {
     isSubmitLoading.value = false;
@@ -150,6 +151,7 @@ const handleVote = async (value: 1 | -1) => {
   } catch (error: any) {
     toast.add({
       title: error.message,
+      color: 'red'
     });
   } finally {
     isVoteLoadingValue.value = false;
