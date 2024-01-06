@@ -29,7 +29,6 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
 import { z } from 'zod';
-import { REQUIRED_PASSWORD_LENGTH } from '~/constants';
 
 definePageMeta({
   middleware: 'auth',
@@ -58,10 +57,17 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await signIn('credentials', {
+    const { error, url }: any = await signIn('credentials', {
       email: event.data.email,
       password: event.data.password,
+      redirect: false,
       callbackUrl: '/',
+    });
+    if (error) throw new Error(error);
+    navigateTo(url, { external: true });
+    toast.add({
+      title: 'Login successfully',
+      color: 'green',
     });
   } catch (error: any) {
     toast.add({

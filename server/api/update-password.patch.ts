@@ -27,5 +27,6 @@ export default defineEventHandler(async (event) => {
 
   _user.password = newPassword;
   _user.passwordConfirm = confirmNewPassword;
-  return _user.save();
+  await _user.save();
+  return { success: 'Password updated!' };
 });

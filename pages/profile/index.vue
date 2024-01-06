@@ -16,8 +16,14 @@
 <script setup lang="ts">
 definePageMeta({
   middleware: 'auth',
-  redirect: '/profile/setting',
+  redirect: (to) => {
+    if (to.path === '/profile') {
+      return '/profile/setting';
+    }
+    return to;
+  },
 });
+
 const links = [
   {
     label: 'Setting',

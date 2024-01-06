@@ -6,11 +6,10 @@ export default defineNuxtPlugin((_nuxtApp) => {
       options.headers = useRequestHeaders(['cookie']) as HeadersInit;
     },
     onResponseError({ request, response }) {
-      // Log error
       console.log('[fetch response error]', request, response.status, response.body);
-      // if (response.status === 401 || response.status === 403) {
-      //   navigateTo('/login');
-      // }
+      if (response.status === 401 || response.status === 403) {
+        navigateTo('/login');
+      }
     },
   });
 });

@@ -42,16 +42,15 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/auth/forget-password', {
+    const { success } = await $fetch('/api/auth/forget-password', {
       method: 'POST',
       body: {
         email: event.data.email,
       },
     });
     toast.add({
-      title: 'An email has been sent to your provided email address. Please check your inbox.',
+      title: success,
       color: 'green',
-      timeout: 0,
     });
   } catch (error: any) {
     toast.add({

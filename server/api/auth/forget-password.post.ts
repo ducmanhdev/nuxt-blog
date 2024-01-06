@@ -1,5 +1,6 @@
-import User from '~/server/models/User';
-import Email from '~/server/mail';
+import { getUserByEmail } from '~/server/db/user';
+import { generatePasswordResetToken } from '~/utils/token';
+import { sendPasswordResetEmail } from '~/utils/mail';
 
 export default defineEventHandler(async (event) => {
   const { email } = await readBody(event);
@@ -10,36 +11,17 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'Missing email',
     });
   }
-  const user = await User.findOne({
-    email,
-  });
 
-  if (!user) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'There is no user with email address',
-    });
-  }
-
-  const resetToken = user.createPasswordResetToken();
-  await user.save({ validateBeforeSave: false });
-
-  try {
-    const url = getRequestURL(event);
-    const protocol = url.protocol;
-    const host = url.host;
-    const resetPasswordUrl = `${protocol}://${host}/reset-password/${resetToken}`;
-    const emailService = new Email(user, resetPasswordUrl);
-    await emailService.sendPasswordReset();
-    return {
-      message: 'Token sent to email',
-    };
-  } catch (error) {
-    user.clearPasswordResetToken();
-    await user.save({ validateBeforeSave: false });
+  const existingUser = await getUserByEmail(email);
+  if (!existingUser) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Something went wrong, please try again',
+      statusMessage: 'Email not found',
     });
   }
+
+  const passwordResetToken = await generatePasswordResetToken(email);
+  await sendPasswordResetEmail(passwordResetToken.email, passwordResetToken.token);
+
+  return { success: 'Reset email sent!' };
 });

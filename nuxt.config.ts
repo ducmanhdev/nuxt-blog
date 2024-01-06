@@ -27,14 +27,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['./constants'],
   },
-  modules: [
-    '@nuxtjs/eslint-module',
-    '@nuxtseo/module',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@sidebase/nuxt-auth',
-    '@pinia/nuxt',
-  ],
+  modules: ['@nuxtjs/eslint-module', '@nuxtseo/module', '@nuxt/image', '@nuxt/ui', '@sidebase/nuxt-auth'],
   nitro: {
     plugins: ['~/server/plugins/mongodb.ts'],
   },

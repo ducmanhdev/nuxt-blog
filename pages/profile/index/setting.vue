@@ -1,7 +1,7 @@
 <template>
   <UForm :state="state" class="space-y-4" @submit="handleSubmit">
-    <UFormGroup label="Avatar" name="avatar">
-      <WidgetUploadAvatar v-model="state.avatar" />
+    <UFormGroup label="Avatar" name="image">
+      <WidgetUploadAvatar v-model="state.image" />
     </UFormGroup>
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" disabled />
@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
 
-const userStore = useUserStore();
 const toast = useToast();
 
 const genderOptions = [
@@ -44,7 +43,7 @@ const genderOptions = [
 ];
 
 type State = {
-  avatar: string;
+  image: string;
   email: string;
   name: string;
   birthday: Date | null;
@@ -53,7 +52,7 @@ type State = {
 };
 
 const state = ref<State>({
-  avatar: '',
+  image: '',
   email: '',
   name: '',
   birthday: null,
@@ -69,7 +68,6 @@ const handleSubmit = async () => {
       method: 'PATCH',
       body: state.value,
     });
-    userStore.refreshUser();
     toast.add({
       title: 'Update profile successfully',
       color: 'green',
@@ -87,7 +85,7 @@ const handleSubmit = async () => {
 const { data } = await useFetch('/api/profile/info');
 watchEffect(() => {
   if (!data.value) return;
-  state.value.avatar = data.value.avatar;
+  state.value.image = data.value.image;
   state.value.email = data.value.email;
   state.value.birthday = dayjs(data.value.birthday).toDate();
   state.value.name = data.value.name;

@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   return User.findByIdAndUpdate(user._id, {
     $set: {
-      avatar: body.avatar,
+      image: body.image,
       name: body.name,
       birthday: body.birthday,
       phone: body.phone,

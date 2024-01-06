@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-2">
     <div class="flex items-center gap-4">
-      <UAvatar size="lg" :src="author.avatar" />
+      <UAvatar size="lg" :src="author.image" />
       <div class="">
         <p class="font-semibold">{{ author.name }}</p>
         <p class="text-sm text-gray-500">{{ dayjs(createdAt).fromNow() }}</p>
@@ -123,7 +123,7 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   } catch (error: any) {
     toast.add({
       title: error.message,
-      color: 'red'
+      color: 'red',
     });
   } finally {
     isSubmitLoading.value = false;
@@ -151,7 +151,7 @@ const handleVote = async (value: 1 | -1) => {
   } catch (error: any) {
     toast.add({
       title: error.message,
-      color: 'red'
+      color: 'red',
     });
   } finally {
     isVoteLoadingValue.value = false;

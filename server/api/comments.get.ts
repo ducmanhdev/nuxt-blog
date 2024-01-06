@@ -1,7 +1,7 @@
 import Comment from '~/server/models/Comment';
 import APIFeatures from '~/utils/api-features';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler((event) => {
   const query = getQuery(event);
   const features = new APIFeatures(
     Comment.find({

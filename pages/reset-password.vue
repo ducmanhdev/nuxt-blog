@@ -4,10 +4,10 @@
       <h1 class="section-title text-center">Forget password</h1>
       <UForm :schema="schema" :state="state" class="space-y-4 max-w-md mx-auto" @submit="handleSubmit">
         <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" />
+          <UInput v-model="state.password" type="password" />
         </UFormGroup>
         <UFormGroup label="Password Confirm" name="passwordConfirm">
-          <UInput v-model="state.passwordConfirm" />
+          <UInput v-model="state.passwordConfirm" type="password" />
         </UFormGroup>
         <div class="text-center">
           <UButton type="submit" block :loading="isSubmitLoading">Send email</UButton>
@@ -56,15 +56,16 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await $fetch(`/api/auth/reset-password/${route.params.token}`, {
+    const { success } = await $fetch('/api/auth/reset-password', {
       method: 'PATCH',
       body: {
+        token: route.query.token,
         password: event.data.password,
         passwordConfirm: event.data.passwordConfirm,
       },
     });
     toast.add({
-      title: 'Reset password successfully',
+      title: success,
       color: 'green',
     });
     navigateTo('/login');

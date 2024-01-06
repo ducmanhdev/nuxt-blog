@@ -1,18 +1,15 @@
-import crypto from 'crypto';
 import { Model, model, Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { z } from 'zod';
 import { REQUIRED_PASSWORD_LENGTH } from '~/constants';
 
 export interface IUser {
-  avatar: string;
+  image: string;
   email: string;
-  isVerified: boolean;
+  emailVerified: Date | null;
   password: string;
   passwordConfirm: string | undefined;
   passwordChangedAt: Date;
-  passwordResetToken: String | undefined;
-  passwordResetExpires: Date | undefined;
   name: string;
   birthday: Date;
   phone: string;
@@ -26,14 +23,12 @@ interface IUserMethods {
   createPasswordResetToken(): string;
 
   clearPasswordResetToken(): void;
-
-  changedPasswordAfter(JWTTimestamp: number): boolean;
 }
 
 type UserModel = Model<IUser, {}, IUserMethods>;
 
 const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
-  avatar: {
+  image: {
     type: String,
   },
   email: {
@@ -47,9 +42,9 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
       message: (props: any) => `${props.value} is not a valid email!`,
     },
   },
-  isVerified: {
-    type: Boolean,
-    default: false,
+  emailVerified: {
+    type: Date,
+    default: null,
   },
   password: {
     type: String,
@@ -69,8 +64,6 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     },
   },
   passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
   name: {
     type: String,
     trim: true,
@@ -115,26 +108,6 @@ UserSchema.pre(/^find/, function (next) {
 
 UserSchema.methods.checkPassword = async function (candidatePassword: string) {
   return await bcrypt.compare(candidatePassword, this.password);
-};
-
-UserSchema.methods.changedPasswordAfter = function (JWTTimestamp: number) {
-  if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(String(this.passwordChangedAt.getTime() / 1000), 10);
-    return JWTTimestamp < changedTimestamp;
-  }
-  return false;
-};
-
-UserSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString('hex');
-  this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-  this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
-  return resetToken;
-};
-
-UserSchema.methods.clearPasswordResetToken = function () {
-  this.passwordResetToken = undefined;
-  this.passwordResetExpires = undefined;
 };
 
 const User = model<IUser, UserModel>('User', UserSchema);

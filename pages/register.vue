@@ -69,7 +69,7 @@ const isSubmitLoading = ref(false);
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
   try {
     isSubmitLoading.value = true;
-    await $fetch('/api/auth/register', {
+    const { success } = await $fetch('/api/auth/register', {
       method: 'POST',
       body: {
         email: event.data.email,
@@ -78,10 +78,9 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
       },
     });
     toast.add({
-      title: 'Registered successfully',
+      title: success,
       color: 'green',
     });
-    navigateTo('/login');
   } catch (error: any) {
     toast.add({
       title: error.message,
