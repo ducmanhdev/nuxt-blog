@@ -30,7 +30,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtseo/module',
-    '@formkit/auto-animate',
     '@nuxt/image',
     '@nuxt/ui',
     '@sidebase/nuxt-auth',
