@@ -42,8 +42,8 @@ const { signIn } = useAuth();
 const toast = useToast();
 
 const state = ref({
-  email: 'work.ducmanh0323@gmail.com',
-  password: '87654321',
+  email: '',
+  password: '',
 });
 
 const schema = z.object({
