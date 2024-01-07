@@ -13,16 +13,17 @@
     >
       <UIcon name="i-mdi-loading" class="animate-spin text-4xl" />
     </div>
-    <UAvatar
-      size="4xl"
-      :src="imageSrc"
-      icon="i-mdi-account"
-      :ui="{
-        wrapper: 'base-input w-auto cursor-pointer p-0',
-        rounded: 'rounded-md',
-      }"
-      @click="handleClick"
-    />
+    <div class="w-auto cursor-pointer" @click="handleClick">
+      <UAvatar
+        size="4xl"
+        :src="imageSrc"
+        icon="i-mdi-account"
+        :ui="{
+          wrapper: 'base-input block cursor-pointer p-0',
+          rounded: 'rounded-md',
+        }"
+      />
+    </div>
     <input ref="inputRef" type="file" class="hidden" :accept="acceptExtensions.join(',')" @change="handleUpload" />
     <template #content>
       <UTooltip text="Remove avatar">
