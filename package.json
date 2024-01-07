@@ -38,7 +38,6 @@
     "cloudinary": "^1.41.1",
     "dayjs": "^1.11.10",
     "h3-formidable": "^1.0.0",
-    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "next-auth": "4.22.5",
     "resend": "^2.1.0",
