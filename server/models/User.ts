@@ -80,6 +80,7 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
   gender: {
     type: String,
     enum: ['Male', 'Female', 'Other'],
+    default: 'Male'
   },
   isActive: {
     type: Boolean,

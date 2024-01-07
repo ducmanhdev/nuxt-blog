@@ -4,7 +4,7 @@ import { validateUser } from '~/server/helpers';
 export default defineEventHandler(async (event) => {
   const user = await validateUser(event);
   const body = await readBody(event);
-  return User.findByIdAndUpdate(user._id, {
+  await User.findByIdAndUpdate(user._id, {
     $set: {
       image: body.image,
       name: body.name,
@@ -13,4 +13,8 @@ export default defineEventHandler(async (event) => {
       gender: body.gender,
     },
   });
+
+  return {
+    success: 'Update profile successfully'
+  }
 });

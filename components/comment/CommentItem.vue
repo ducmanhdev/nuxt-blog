@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-2">
     <div class="flex items-center gap-4">
-      <UAvatar size="lg" :src="author.image" />
+      <UAvatar size="lg" :src="author.image" icon="i-mdi-account" />
       <div class="">
         <p class="font-semibold">{{ author.name }}</p>
         <p class="text-sm text-gray-500">{{ dayjs(createdAt).fromNow() }}</p>

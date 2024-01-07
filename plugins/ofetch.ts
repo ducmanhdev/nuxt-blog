@@ -7,9 +7,11 @@ export default defineNuxtPlugin((_nuxtApp) => {
     },
     onResponseError({ request, response }) {
       console.log('[fetch response error]', request, response.status, response.body);
-      if (response.status === 401 || response.status === 403) {
-        navigateTo('/login');
-      }
+      // if (response.status === 401 || response.status === 403) {
+      //   console.log({ response })
+      //   const { signOut } = useAuth();
+      //   signOut({ callbackUrl: '/' });
+      // }
     },
   });
 });
