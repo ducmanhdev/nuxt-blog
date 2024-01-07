@@ -26,7 +26,7 @@
 import dayjs from 'dayjs';
 
 const toast = useToast();
-
+const { getSession } = useAuth();
 const genderOptions = [
   {
     value: 'Male',
@@ -72,6 +72,7 @@ const handleSubmit = async () => {
       title: 'Update profile successfully',
       color: 'green',
     });
+    getSession({ force: true });
   } catch (error: any) {
     toast.add({
       title: error.message,
