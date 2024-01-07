@@ -1,7 +1,7 @@
 <template>
   <div class="py-10">
     <div class="container">
-      <div class="grid grid-cols-[250px_1fr] gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-[250px_1fr] gap-6">
         <aside class="">
           <UVerticalNavigation :links="links" />
         </aside>
