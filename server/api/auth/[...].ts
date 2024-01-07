@@ -8,7 +8,6 @@ import { generateVerificationToken } from '~/utils/token';
 
 export type ExtendedUser = DefaultSession['user'] & {
   _id: Types.ObjectId;
-  id: string;
 };
 
 declare module 'next-auth' {

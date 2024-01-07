@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const domain = process.env.BASE_URL || 'http://localhost:3000';
+const domain = process.env.BASE_URL;
 
 const from = 'onboarding@resend.dev';
 
