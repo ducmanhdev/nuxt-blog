@@ -1,8 +1,8 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import type { DefaultSession } from 'next-auth';
+import type { Types } from 'mongoose';
 import { NuxtAuthHandler } from '#auth';
 import User from '~/server/models/User';
-import type { Types } from 'mongoose';
 import { getUserById } from '~/server/db/user';
 
 export type ExtendedUser = DefaultSession['user'] & {
@@ -53,8 +53,8 @@ export default NuxtAuthHandler({
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token}) {
-      if(!token.sub) return token;
+    async jwt({ token }) {
+      if (!token.sub) return token;
       const existingUser = await getUserById(token.sub);
       if (!existingUser) return token;
       token.user = existingUser;
