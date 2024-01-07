@@ -19,7 +19,7 @@
         :src="imageSrc"
         icon="i-mdi-account"
         :ui="{
-          wrapper: 'base-input block cursor-pointer p-0',
+          wrapper: 'base-input flex cursor-pointer p-0',
           rounded: 'rounded-md',
         }"
       />
