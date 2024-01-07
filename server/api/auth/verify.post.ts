@@ -36,9 +36,10 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  existingUser.emailVerified = new Date();
-  existingUser.email = existingToken.email; // ???
-  await existingUser.save();
+  await existingUser.updateOne({
+    emailVerified: new Date(),
+    email: existingToken.email,
+  });
 
   await VerificationToken.findByIdAndDelete(existingToken.id);
 

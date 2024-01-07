@@ -3,7 +3,8 @@ import type { DefaultSession } from 'next-auth';
 import type { Types } from 'mongoose';
 import { NuxtAuthHandler } from '#auth';
 import User from '~/server/models/User';
-import { getUserById } from '~/server/db/user';
+import { sendVerificationEmail } from '~/utils/mail';
+import { generateVerificationToken } from '~/utils/token';
 
 export type ExtendedUser = DefaultSession['user'] & {
   _id: Types.ObjectId;
@@ -39,13 +40,17 @@ export default NuxtAuthHandler({
         }
 
         if (!existingUser.emailVerified) {
+          const verificationToken = await generateVerificationToken(existingUser.email);
+          await sendVerificationEmail(verificationToken.email, verificationToken.token);
           throw createError({
-            statusCode: 403,
-            statusMessage: 'Email is not verified, please confirm your email!',
+            statusCode: 401,
+            statusMessage: 'Email not verified. A new verification email has been sent to your email address.',
           });
         }
 
-        return existingUser;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { password: _, ...user } = existingUser.toObject();
+        return user;
       },
     }),
   ],
@@ -53,15 +58,13 @@ export default NuxtAuthHandler({
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token }) {
-      if (!token.sub) return token;
-      const existingUser = await getUserById(token.sub);
-      if (!existingUser) return token;
-      token.user = existingUser;
+    jwt({ token, user }) {
+      if (!user) return token;
+      token.user = user;
       return token;
     },
     session({ session, token }) {
-      if (session.user && token.sub) {
+      if (session.user && token.user) {
         session.user = token.user as ExtendedUser;
       }
       return session;

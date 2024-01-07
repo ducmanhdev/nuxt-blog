@@ -7,10 +7,11 @@ export default defineNuxtPlugin((_nuxtApp) => {
     },
     onResponseError({ request, response }) {
       console.log('[fetch response error]', request, response.status, response.body);
-      if (response.status === 401) {
-        const { signOut } = useAuth();
-        signOut({ callbackUrl: '/login' });
-      }
+      // callback/credentials
+      // if (response.status === 401 && request.url.pathname !== 'credentials') {
+      //   const { signOut } = useAuth();
+      //   signOut({ callbackUrl: '/login' });
+      // }
     },
   });
 });

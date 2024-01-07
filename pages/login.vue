@@ -70,6 +70,7 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
       color: 'green',
     });
   } catch (error: any) {
+    console.log(error)
     toast.add({
       title: error.message,
       color: 'red',
