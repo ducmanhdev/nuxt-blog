@@ -1,75 +1,46 @@
-# Nuxt 3 Minimal Starter
+# Nuxt blog
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+![image](public/screenshot.jpeg)
 
-## Setup
+Key Features:
+- 📦 Pnpm (faster than npm and yarn)
+- 📦 Nuxt.js 
+- 📱 Responsive design
+- 🔐 Next-auth v4 
+- 🔑 Credentials Provider
+- 🔒 Forgot password functionality
+- ✉️ Email verification
+- 🤔 Forgot password
+- 📈 Send email with Resend
+- 🔄 Upload images with Cloudinary
+- 📝 Tinymce editor
+### Install packages
 
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
+```shell
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+### Setup .env file
 
-Start the development server on `http://localhost:3000`:
+```dotenv
+BASE_URL=
 
-```bash
-# npm
-npm run dev
+MONGODB_URI=
 
-# pnpm
+AUTH_SECRET=
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_UPLOAD_PRESET=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRRET=
+
+TINYMCE_API_KEY=
+
+RESEND_API_KEY=
+```
+
+### Start the app
+
+```shell
 pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
