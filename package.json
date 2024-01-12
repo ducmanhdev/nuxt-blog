@@ -16,7 +16,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtseo/module": "2.0.0-beta.45",
-    "@sidebase/nuxt-auth": "0.6.3",
+    "@sidebase/nuxt-auth": "0.6.4",
     "@tailwindcss/typography": "^0.5.10",
     "@types/async": "^3.2.24",
     "@types/bcrypt": "^5.0.2",
